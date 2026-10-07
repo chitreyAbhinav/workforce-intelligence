@@ -1,0 +1,479 @@
+{
+  "nodes": [
+    {
+      "id": "Business Analyst",
+      "label": "Business Analyst",
+      "median_salary_lpa": 9.1,
+      "job_postings": 634,
+      "top_skills": [
+        "SQL",
+        "Business Acumen",
+        "Excel / Advanced Excel",
+        "Tableau"
+      ]
+    },
+    {
+      "id": "Data Analyst",
+      "label": "Data Analyst",
+      "median_salary_lpa": 8.0,
+      "job_postings": 8965,
+      "top_skills": [
+        "SQL",
+        "Excel / Advanced Excel",
+        "Tableau",
+        "Power BI"
+      ]
+    },
+    {
+      "id": "Data Architect",
+      "label": "Data Architect",
+      "median_salary_lpa": 20.0,
+      "job_postings": 417,
+      "top_skills": [
+        "SQL",
+        "ETL Pipelines",
+        "AWS",
+        "Docker / Kubernetes"
+      ]
+    },
+    {
+      "id": "Data Engineer",
+      "label": "Data Engineer",
+      "median_salary_lpa": 12.5,
+      "job_postings": 1155,
+      "top_skills": [
+        "SQL",
+        "Python",
+        "Spark / PySpark",
+        "ETL Pipelines"
+      ]
+    },
+    {
+      "id": "Data Scientist",
+      "label": "Data Scientist",
+      "median_salary_lpa": 12.5,
+      "job_postings": 190,
+      "top_skills": [
+        "Python",
+        "SQL",
+        "Statistical Modeling",
+        "Machine Learning"
+      ]
+    },
+    {
+      "id": "Machine Learning Engineer",
+      "label": "Machine Learning Engineer",
+      "median_salary_lpa": 12.5,
+      "job_postings": 511,
+      "top_skills": [
+        "Machine Learning",
+        "Python",
+        "R",
+        "SQL"
+      ]
+    },
+    {
+      "id": "Senior Business Analyst",
+      "label": "Senior Business Analyst",
+      "median_salary_lpa": 12.5,
+      "job_postings": 119,
+      "top_skills": [
+        "Business Acumen",
+        "SQL",
+        "Excel / Advanced Excel",
+        "Tableau"
+      ]
+    },
+    {
+      "id": "Senior Data Analyst",
+      "label": "Senior Data Analyst",
+      "median_salary_lpa": 8.5,
+      "job_postings": 22,
+      "top_skills": [
+        "Excel / Advanced Excel",
+        "SQL",
+        "Tableau",
+        "Power BI"
+      ]
+    },
+    {
+      "id": "Senior Data Engineer",
+      "label": "Senior Data Engineer",
+      "median_salary_lpa": 17.5,
+      "job_postings": 8,
+      "top_skills": [
+        "SQL",
+        "Python",
+        "Spark / PySpark",
+        "ETL Pipelines"
+      ]
+    },
+    {
+      "id": "Senior Data Scientist",
+      "label": "Senior Data Scientist",
+      "median_salary_lpa": 20.0,
+      "job_postings": 43,
+      "top_skills": [
+        "Python",
+        "Machine Learning",
+        "R",
+        "SQL"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "Data Engineer",
+      "target": "Senior Data Engineer",
+      "weight": 0.984,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "SQL",
+        "Python",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Business Analyst",
+      "target": "Senior Business Analyst",
+      "weight": 0.971,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "SQL",
+        "Business Acumen",
+        "Excel / Advanced Excel"
+      ]
+    },
+    {
+      "source": "Data Analyst",
+      "target": "Senior Data Analyst",
+      "weight": 0.942,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "Excel / Advanced Excel",
+        "SQL",
+        "Tableau"
+      ]
+    },
+    {
+      "source": "Data Scientist",
+      "target": "Senior Data Scientist",
+      "weight": 0.939,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "Python",
+        "Machine Learning",
+        "SQL"
+      ]
+    },
+    {
+      "source": "Machine Learning Engineer",
+      "target": "Senior Data Scientist",
+      "weight": 0.929,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "Machine Learning",
+        "Python",
+        "R"
+      ]
+    },
+    {
+      "source": "Business Analyst",
+      "target": "Data Analyst",
+      "weight": 0.896,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "SQL",
+        "Excel / Advanced Excel",
+        "Tableau"
+      ]
+    },
+    {
+      "source": "Business Analyst",
+      "target": "Senior Data Analyst",
+      "weight": 0.847,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "Excel / Advanced Excel",
+        "SQL",
+        "Tableau"
+      ]
+    },
+    {
+      "source": "Data Analyst",
+      "target": "Senior Business Analyst",
+      "weight": 0.821,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "SQL",
+        "Excel / Advanced Excel",
+        "Tableau"
+      ]
+    },
+    {
+      "source": "Data Scientist",
+      "target": "Machine Learning Engineer",
+      "weight": 0.818,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "Machine Learning",
+        "Python",
+        "SQL"
+      ]
+    },
+    {
+      "source": "Senior Business Analyst",
+      "target": "Senior Data Analyst",
+      "weight": 0.813,
+      "difficulty": "Low",
+      "bridge_skills": [
+        "Excel / Advanced Excel",
+        "SQL",
+        "Tableau"
+      ]
+    },
+    {
+      "source": "Data Architect",
+      "target": "Data Engineer",
+      "weight": 0.629,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "SQL",
+        "ETL Pipelines",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Data Architect",
+      "target": "Senior Data Engineer",
+      "weight": 0.618,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "SQL",
+        "ETL Pipelines",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Data Scientist",
+      "target": "Senior Data Engineer",
+      "weight": 0.604,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "SQL",
+        "Python",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Data Engineer",
+      "target": "Data Scientist",
+      "weight": 0.584,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "SQL",
+        "Python",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Senior Data Engineer",
+      "target": "Senior Data Scientist",
+      "weight": 0.582,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "Python",
+        "SQL",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Machine Learning Engineer",
+      "target": "Senior Data Engineer",
+      "weight": 0.566,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "Python",
+        "SQL",
+        "Machine Learning"
+      ]
+    },
+    {
+      "source": "Data Engineer",
+      "target": "Senior Data Scientist",
+      "weight": 0.56,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "Python",
+        "SQL",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Data Engineer",
+      "target": "Machine Learning Engineer",
+      "weight": 0.527,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "Python",
+        "SQL",
+        "Spark / PySpark"
+      ]
+    },
+    {
+      "source": "Data Scientist",
+      "target": "Senior Data Analyst",
+      "weight": 0.501,
+      "difficulty": "Moderate",
+      "bridge_skills": [
+        "SQL",
+        "Python",
+        "Excel / Advanced Excel"
+      ]
+    },
+    {
+      "source": "Senior Data Analyst",
+      "target": "Senior Data Scientist",
+      "weight": 0.445,
+      "difficulty": "High",
+      "bridge_skills": [
+        "SQL",
+        "Python",
+        "Machine Learning"
+      ]
+    },
+    {
+      "source": "Senior Data Analyst",
+      "target": "Senior Data Engineer",
+      "weight": 0.424,
+      "difficulty": "High",
+      "bridge_skills": [
+        "SQL",
+        "Python",
+        "ETL Pipelines"
+      ]
+    }
+  ],
+  "similarity_matrix": {
+    "Business Analyst": {
+      "Business Analyst": 1.0,
+      "Data Analyst": 0.896,
+      "Data Architect": 0.332,
+      "Data Engineer": 0.308,
+      "Data Scientist": 0.318,
+      "Machine Learning Engineer": 0.15,
+      "Senior Business Analyst": 0.971,
+      "Senior Data Analyst": 0.847,
+      "Senior Data Engineer": 0.332,
+      "Senior Data Scientist": 0.217
+    },
+    "Data Analyst": {
+      "Business Analyst": 0.896,
+      "Data Analyst": 1.0,
+      "Data Architect": 0.309,
+      "Data Engineer": 0.295,
+      "Data Scientist": 0.332,
+      "Machine Learning Engineer": 0.153,
+      "Senior Business Analyst": 0.821,
+      "Senior Data Analyst": 0.942,
+      "Senior Data Engineer": 0.332,
+      "Senior Data Scientist": 0.226
+    },
+    "Data Architect": {
+      "Business Analyst": 0.332,
+      "Data Analyst": 0.309,
+      "Data Architect": 1.0,
+      "Data Engineer": 0.629,
+      "Data Scientist": 0.345,
+      "Machine Learning Engineer": 0.269,
+      "Senior Business Analyst": 0.303,
+      "Senior Data Analyst": 0.34,
+      "Senior Data Engineer": 0.618,
+      "Senior Data Scientist": 0.27
+    },
+    "Data Engineer": {
+      "Business Analyst": 0.308,
+      "Data Analyst": 0.295,
+      "Data Architect": 0.629,
+      "Data Engineer": 1.0,
+      "Data Scientist": 0.584,
+      "Machine Learning Engineer": 0.527,
+      "Senior Business Analyst": 0.289,
+      "Senior Data Analyst": 0.386,
+      "Senior Data Engineer": 0.984,
+      "Senior Data Scientist": 0.56
+    },
+    "Data Scientist": {
+      "Business Analyst": 0.318,
+      "Data Analyst": 0.332,
+      "Data Architect": 0.345,
+      "Data Engineer": 0.584,
+      "Data Scientist": 1.0,
+      "Machine Learning Engineer": 0.818,
+      "Senior Business Analyst": 0.389,
+      "Senior Data Analyst": 0.501,
+      "Senior Data Engineer": 0.604,
+      "Senior Data Scientist": 0.939
+    },
+    "Machine Learning Engineer": {
+      "Business Analyst": 0.15,
+      "Data Analyst": 0.153,
+      "Data Architect": 0.269,
+      "Data Engineer": 0.527,
+      "Data Scientist": 0.818,
+      "Machine Learning Engineer": 1.0,
+      "Senior Business Analyst": 0.243,
+      "Senior Data Analyst": 0.372,
+      "Senior Data Engineer": 0.566,
+      "Senior Data Scientist": 0.929
+    },
+    "Senior Business Analyst": {
+      "Business Analyst": 0.971,
+      "Data Analyst": 0.821,
+      "Data Architect": 0.303,
+      "Data Engineer": 0.289,
+      "Data Scientist": 0.389,
+      "Machine Learning Engineer": 0.243,
+      "Senior Business Analyst": 1.0,
+      "Senior Data Analyst": 0.813,
+      "Senior Data Engineer": 0.317,
+      "Senior Data Scientist": 0.299
+    },
+    "Senior Data Analyst": {
+      "Business Analyst": 0.847,
+      "Data Analyst": 0.942,
+      "Data Architect": 0.34,
+      "Data Engineer": 0.386,
+      "Data Scientist": 0.501,
+      "Machine Learning Engineer": 0.372,
+      "Senior Business Analyst": 0.813,
+      "Senior Data Analyst": 1.0,
+      "Senior Data Engineer": 0.424,
+      "Senior Data Scientist": 0.445
+    },
+    "Senior Data Engineer": {
+      "Business Analyst": 0.332,
+      "Data Analyst": 0.332,
+      "Data Architect": 0.618,
+      "Data Engineer": 0.984,
+      "Data Scientist": 0.604,
+      "Machine Learning Engineer": 0.566,
+      "Senior Business Analyst": 0.317,
+      "Senior Data Analyst": 0.424,
+      "Senior Data Engineer": 1.0,
+      "Senior Data Scientist": 0.582
+    },
+    "Senior Data Scientist": {
+      "Business Analyst": 0.217,
+      "Data Analyst": 0.226,
+      "Data Architect": 0.27,
+      "Data Engineer": 0.56,
+      "Data Scientist": 0.939,
+      "Machine Learning Engineer": 0.929,
+      "Senior Business Analyst": 0.299,
+      "Senior Data Analyst": 0.445,
+      "Senior Data Engineer": 0.582,
+      "Senior Data Scientist": 1.0
+    }
+  }
+}

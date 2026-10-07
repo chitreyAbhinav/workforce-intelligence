@@ -1,0 +1,399 @@
+{
+  "thresholds": {
+    "demand_threshold_pct": 12.0,
+    "impact_threshold_score": 18.0
+  },
+  "quadrant_distribution": {
+    "Q1_Core_Bets": 3,
+    "Q2_Table_Stakes": 1,
+    "Q3_Elite_Differentiators": 16,
+    "Q4_Low_Priority": 15
+  },
+  "skills_matrix": [
+    {
+      "skill": "SQL",
+      "category": "Programming",
+      "market_demand_pct": 79.92,
+      "success_impact_score": 14.6,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 9641,
+      "quadrant": "Q2: Table Stakes / Commodity",
+      "quadrant_code": "Q2_Table_Stakes",
+      "strategic_action": "Foundational prerequisite; expected by everyone but offers limited compensation premium."
+    },
+    {
+      "skill": "Excel / Advanced Excel",
+      "category": "BI & Analytics",
+      "market_demand_pct": 66.3,
+      "success_impact_score": 35.7,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 7999,
+      "quadrant": "Q1: Strategic Core Bets",
+      "quadrant_code": "Q1_Core_Bets",
+      "strategic_action": "Must master; drives high hiring volume AND top compensation outcomes."
+    },
+    {
+      "skill": "Tableau",
+      "category": "BI & Analytics",
+      "market_demand_pct": 63.69,
+      "success_impact_score": 35.7,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 7683,
+      "quadrant": "Q1: Strategic Core Bets",
+      "quadrant_code": "Q1_Core_Bets",
+      "strategic_action": "Must master; drives high hiring volume AND top compensation outcomes."
+    },
+    {
+      "skill": "Power BI",
+      "category": "BI & Analytics",
+      "market_demand_pct": 63.05,
+      "success_impact_score": 35.7,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 7606,
+      "quadrant": "Q1: Strategic Core Bets",
+      "quadrant_code": "Q1_Core_Bets",
+      "strategic_action": "Must master; drives high hiring volume AND top compensation outcomes."
+    },
+    {
+      "skill": "Python",
+      "category": "Programming",
+      "market_demand_pct": 11.45,
+      "success_impact_score": 23.6,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 1381,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "ETL Pipelines",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 9.42,
+      "success_impact_score": 17.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 1137,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Spark / PySpark",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 7.53,
+      "success_impact_score": 17.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 908,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Java",
+      "category": "Programming",
+      "market_demand_pct": 5.6,
+      "success_impact_score": 23.6,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 676,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Machine Learning",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 5.51,
+      "success_impact_score": 26.4,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 665,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Business Acumen",
+      "category": "BI & Analytics",
+      "market_demand_pct": 5.36,
+      "success_impact_score": 44.7,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 647,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "SAS",
+      "category": "Programming",
+      "market_demand_pct": 4.19,
+      "success_impact_score": 23.6,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 505,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "R",
+      "category": "Programming",
+      "market_demand_pct": 3.85,
+      "success_impact_score": 33.4,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 465,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Statistical Modeling",
+      "category": "BI & Analytics",
+      "market_demand_pct": 2.88,
+      "success_impact_score": 33.4,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 348,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "AWS",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 2.42,
+      "success_impact_score": 17.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 292,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Docker / Kubernetes",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 2.06,
+      "success_impact_score": 24.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 248,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Hadoop",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 2.03,
+      "success_impact_score": 17.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 245,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Natural Language Processing",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 1.19,
+      "success_impact_score": 26.4,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 143,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Hive",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 1.13,
+      "success_impact_score": 17.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 136,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Deep Learning",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 1.1,
+      "success_impact_score": 27.4,
+      "salary_premium_lpa": 12.0,
+      "job_postings_count": 133,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Data Visualization",
+      "category": "BI & Analytics",
+      "market_demand_pct": 0.94,
+      "success_impact_score": 44.7,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 114,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "CI/CD & DevOps",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.83,
+      "success_impact_score": 24.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 100,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Scala",
+      "category": "Programming",
+      "market_demand_pct": 0.82,
+      "success_impact_score": 23.6,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 99,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Azure",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.61,
+      "success_impact_score": 17.0,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 73,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Computer Vision",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 0.42,
+      "success_impact_score": 26.4,
+      "salary_premium_lpa": 4.5,
+      "job_postings_count": 51,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "Kafka",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.17,
+      "success_impact_score": 18.0,
+      "salary_premium_lpa": 12.0,
+      "job_postings_count": 21,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "TensorFlow",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 0.1,
+      "success_impact_score": 27.4,
+      "salary_premium_lpa": 8.25,
+      "job_postings_count": 12,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "PyTorch",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 0.07,
+      "success_impact_score": 17.4,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 9,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "GCP",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.07,
+      "success_impact_score": 8.0,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 9,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Generative AI / LLMs",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 0.02,
+      "success_impact_score": 17.4,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 3,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "C++",
+      "category": "Programming",
+      "market_demand_pct": 0.0,
+      "success_impact_score": 14.6,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 0,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Julia",
+      "category": "Programming",
+      "market_demand_pct": 0.0,
+      "success_impact_score": 24.4,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 0,
+      "quadrant": "Q3: Elite Differentiators",
+      "quadrant_code": "Q3_Elite_Differentiators",
+      "strategic_action": "High pricing power; specialized skills commanding top-decile compensation."
+    },
+    {
+      "skill": "MLOps",
+      "category": "AI / Machine Learning",
+      "market_demand_pct": 0.0,
+      "success_impact_score": 17.4,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 0,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Airflow",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.0,
+      "success_impact_score": 8.0,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 0,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Databricks",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.0,
+      "success_impact_score": 8.0,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 0,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    },
+    {
+      "skill": "Snowflake",
+      "category": "Big Data & Cloud",
+      "market_demand_pct": 0.0,
+      "success_impact_score": 8.0,
+      "salary_premium_lpa": 0.0,
+      "job_postings_count": 0,
+      "quadrant": "Q4: Specialized / Lower Priority",
+      "quadrant_code": "Q4_Low_Priority",
+      "strategic_action": "Learn as situational support; not a primary career catalyst."
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "junior_data_scientist_skill_model": {
+    "target": "salary_hike_high_or_low",
+    "sample_size": 139,
+    "positive_ratio": 0.525,
+    "features": [
+      "big_data_skills",
+      "maths-stats_skills",
+      "coding_skills",
+      "ai_and_ml_skills",
+      "dashboard_and_storytelling_skills"
+    ],
+    "best_model": "Random Forest",
+    "models": {
+      "Random Forest": {
+        "cv_accuracy": 0.841,
+        "cv_precision": 0.852,
+        "cv_recall": 0.85,
+        "cv_f1": 0.847,
+        "cv_roc_auc": 0.87,
+        "confusion_matrix": [
+          [
+            55,
+            11
+          ],
+          [
+            4,
+            69
+          ]
+        ],
+        "roc_curve": {
+          "fpr": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.015,
+            0.015,
+            0.015,
+            0.015,
+            0.015,
+            0.015,
+            0.03,
+            0.03,
+            0.03
+          ],
+          "tpr": [
+            0.0,
+            0.014,
+            0.027,
+            0.082,
+            0.151,
+            0.233,
+            0.247,
+            0.301,
+            0.37,
+            0.397,
+            0.438,
+            0.521,
+            0.534,
+            0.562,
+            0.575
+          ]
+        },
+        "feature_importance": {
+          "big_data_skills": 0.0798,
+          "maths-stats_skills": 0.2441,
+          "coding_skills": 0.1457,
+          "ai_and_ml_skills": 0.1736,
+          "dashboard_and_storytelling_skills": 0.3567
+        }
+      },
+      "Gradient Boosting": {
+        "cv_accuracy": 0.783,
+        "cv_precision": 0.826,
+        "cv_recall": 0.754,
+        "cv_f1": 0.78,
+        "cv_roc_auc": 0.85,
+        "confusion_matrix": [
+          [
+            58,
+            8
+          ],
+          [
+            4,
+            69
+          ]
+        ],
+        "roc_curve": {
+          "fpr": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "tpr": [
+            0.0,
+            0.014,
+            0.041,
+            0.068,
+            0.096,
+            0.164,
+            0.178,
+            0.205,
+            0.233,
+            0.37,
+            0.438,
+            0.479,
+            0.534,
+            0.562,
+            0.603
+          ]
+        },
+        "feature_importance": {
+          "big_data_skills": 0.0625,
+          "maths-stats_skills": 0.2485,
+          "coding_skills": 0.0878,
+          "ai_and_ml_skills": 0.1184,
+          "dashboard_and_storytelling_skills": 0.4829
+        }
+      },
+      "Logistic Regression": {
+        "cv_accuracy": 0.726,
+        "cv_precision": 0.687,
+        "cv_recall": 0.877,
+        "cv_f1": 0.769,
+        "cv_roc_auc": 0.783,
+        "confusion_matrix": [
+          [
+            41,
+            25
+          ],
+          [
+            6,
+            67
+          ]
+        ],
+        "roc_curve": {
+          "fpr": [
+            0.0,
+            0.015,
+            0.03,
+            0.045,
+            0.045,
+            0.045,
+            0.061,
+            0.061,
+            0.061,
+            0.061,
+            0.061,
+            0.061,
+            0.061,
+            0.061,
+            0.076
+          ],
+          "tpr": [
+            0.0,
+            0.0,
+            0.0,
+            0.014,
+            0.041,
+            0.068,
+            0.096,
+            0.137,
+            0.151,
+            0.178,
+            0.205,
+            0.233,
+            0.247,
+            0.301,
+            0.301
+          ]
+        },
+        "feature_importance": {
+          "big_data_skills": -0.2768,
+          "maths-stats_skills": 0.5,
+          "coding_skills": 0.1071,
+          "ai_and_ml_skills": -0.2623,
+          "dashboard_and_storytelling_skills": 0.6892
+        }
+      }
+    }
+  },
+  "senior_data_scientist_personality_model": {
+    "target": "success_classification_high_low",
+    "sample_size": 160,
+    "positive_ratio": 0.5,
+    "features": [
+      "neuroticism",
+      "extraversion",
+      "openness_to_experience",
+      "agreeableness",
+      "conscientiousness"
+    ],
+    "best_model": "Logistic Regression",
+    "models": {
+      "Random Forest": {
+        "cv_accuracy": 0.644,
+        "cv_precision": 0.66,
+        "cv_recall": 0.6,
+        "cv_f1": 0.624,
+        "cv_roc_auc": 0.723,
+        "confusion_matrix": [
+          [
+            71,
+            9
+          ],
+          [
+            10,
+            70
+          ]
+        ],
+        "roc_curve": {
+          "fpr": [
+            0.0,
+            0.0,
+            0.0,
+            0.013,
+            0.013,
+            0.037,
+            0.037,
+            0.05,
+            0.05,
+            0.075,
+            0.075,
+            0.087,
+            0.087,
+            0.1,
+            0.1
+          ],
+          "tpr": [
+            0.0,
+            0.013,
+            0.425,
+            0.425,
+            0.787,
+            0.787,
+            0.8,
+            0.8,
+            0.812,
+            0.812,
+            0.825,
+            0.825,
+            0.85,
+            0.85,
+            0.863
+          ]
+        },
+        "feature_importance": {
+          "neuroticism": 0.2751,
+          "extraversion": 0.1739,
+          "openness_to_experience": 0.1629,
+          "agreeableness": 0.1124,
+          "conscientiousness": 0.2756
+        }
+      },
+      "Gradient Boosting": {
+        "cv_accuracy": 0.625,
+        "cv_precision": 0.624,
+        "cv_recall": 0.625,
+        "cv_f1": 0.622,
+        "cv_roc_auc": 0.707,
+        "confusion_matrix": [
+          [
+            79,
+            1
+          ],
+          [
+            1,
+            79
+          ]
+        ],
+        "roc_curve": {
+          "fpr": [
+            0.0,
+            0.0,
+            0.0,
+            0.013,
+            0.013,
+            1.0
+          ],
+          "tpr": [
+            0.0,
+            0.013,
+            0.963,
+            0.963,
+            1.0,
+            1.0
+          ]
+        },
+        "feature_importance": {
+          "neuroticism": 0.2774,
+          "extraversion": 0.1517,
+          "openness_to_experience": 0.1997,
+          "agreeableness": 0.123,
+          "conscientiousness": 0.2482
+        }
+      },
+      "Logistic Regression": {
+        "cv_accuracy": 0.662,
+        "cv_precision": 0.648,
+        "cv_recall": 0.725,
+        "cv_f1": 0.678,
+        "cv_roc_auc": 0.753,
+        "confusion_matrix": [
+          [
+            50,
+            30
+          ],
+          [
+            21,
+            59
+          ]
+        ],
+        "roc_curve": {
+          "fpr": [
+            0.0,
+            0.0,
+            0.0,
+            0.025,
+            0.025,
+            0.037,
+            0.037,
+            0.05,
+            0.05,
+            0.087,
+            0.087,
+            0.113,
+            0.113,
+            0.138,
+            0.138
+          ],
+          "tpr": [
+            0.0,
+            0.013,
+            0.25,
+            0.25,
+            0.3,
+            0.3,
+            0.362,
+            0.362,
+            0.375,
+            0.375,
+            0.412,
+            0.412,
+            0.425,
+            0.425,
+            0.438
+          ]
+        },
+        "feature_importance": {
+          "neuroticism": -2.0745,
+          "extraversion": 0.8314,
+          "openness_to_experience": 0.7771,
+          "agreeableness": -0.0652,
+          "conscientiousness": 1.524
+        }
+      }
+    }
+  }
+}
