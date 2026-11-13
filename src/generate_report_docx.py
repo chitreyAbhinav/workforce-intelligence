@@ -210,9 +210,15 @@ def build_full_report():
         
     p_inst = doc.add_paragraph()
     format_paragraph(p_inst, space_before=6, space_after=0, line_spacing=1.5, align=WD_ALIGN_PARAGRAPH.CENTER)
-    r_inst = p_inst.add_run("DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING\nCHANDIGARH UNIVERSITY, GHARUAN, MOHALI\nJUNE 2026")
+    r_inst = p_inst.add_run(
+        "INDUSTRY PARTNER: COGNISTRAT TECHNOLOGIES PVT. LTD.\n"
+        "INTERNSHIP MODE: REMOTE / VIRTUAL (ENTERPRISE AI R&D LAB)\n\n"
+        "DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING\n"
+        "CHANDIGARH UNIVERSITY, GHARUAN, MOHALI\n"
+        "JUNE 2026"
+    )
     r_inst.font.name = 'Times New Roman'
-    r_inst.font.size = Pt(13)
+    r_inst.font.size = Pt(12)
     r_inst.bold = True
 
     doc.add_page_break()
@@ -234,9 +240,9 @@ def build_full_report():
         'Certified that this project report titled "WORKFORCEX: STRATEGIC WORKFORCE INTELLIGENCE, '
         'PREDICTIVE CAREER GPS AND EXPLAINABLE TALENT ANALYTICS PLATFORM" is the bonafide work of '
         '"ABHINAV CHITREY (UID: 24BCS12754)" who carried out the industrial training project work '
-        'under my supervision during the academic session 2025–2026 in partial fulfillment of the '
-        'requirements for the award of the degree of Bachelor of Engineering in Computer Science & '
-        'Engineering from Chandigarh University, Gharuan, Mohali.'
+        '(Mode: Remote / Virtual) under my supervision during the academic session 2025–2026 in partial '
+        'fulfillment of the requirements for the award of the degree of Bachelor of Engineering in '
+        'Computer Science & Engineering from Chandigarh University, Gharuan, Mohali.'
     )
     r.font.name = 'Times New Roman'
     r.font.size = Pt(13)
@@ -584,9 +590,10 @@ def build_full_report():
     add_body_p(doc,
         "To decisively overcome these fundamental deficiencies, this industrial training project introduces WorkforceX: a robust, "
         "enterprise-grade Strategic Workforce Intelligence, Predictive Career GPS, and Explainable Talent Analytics Platform. Developed "
-        "during a six-week intensive industrial research internship at CogniStrat Technologies Pvt. Ltd., Bengaluru, the platform ingests, "
-        "audits, and harmonizes 13,965 real-world talent records spanning four heterogeneous data sources: real-world job market postings, "
-        "empirical junior data scientist career profiles, senior role personality psychometrics, and organizational compensation structures."
+        "during a six-week intensive industrial research internship (Mode: Remote / Virtual) with CogniStrat Technologies Pvt. Ltd., "
+        "Bengaluru, the platform ingests, audits, and harmonizes 13,965 real-world talent records spanning four heterogeneous data sources: "
+        "real-world job market postings, empirical junior data scientist career profiles, senior role personality psychometrics, and "
+        "organizational compensation structures."
     )
     add_body_p(doc,
         "The core analytical engine incorporates three major innovations: (1) dual predictive machine learning models comprising a "
@@ -764,16 +771,17 @@ def build_full_report():
         "and talent risk mitigation."
     )
 
-    add_styled_heading(doc, "2.2 Industrial Workflow, Engineering Standards & Agile Culture", level=2)
+    add_styled_heading(doc, "2.2 Industrial Workflow, Remote Collaborative Standards & Agile Culture", level=2)
     add_body_p(doc,
-        "During the six-week industrial internship, the author was integrated directly into CogniStrat's Enterprise AI Engineering team, "
-        "adhering to rigorous professional engineering standards and agile development methodologies. Key operational practices included:\n"
-        "• Agile Sprint Cadence: Participation in weekly sprint planning, daily standup synchronization meetings, and sprint retrospective sessions.\n"
-        "• Version Control & Git Flow: Strict adherence to feature branching, semantic git commit messaging, and pull request (PR) reviews requiring "
-        "multi-peer code approvals before merging into main release branches.\n"
-        "• Test-Driven Development (TDD): Writing unit test assertions alongside data processing scripts to ensure complete pipeline repeatability.\n"
-        "• Secure Coding & Data Governance: Masking personal identifiable information (PII), enforcing deterministic random seeds across all ML "
-        "estimators, and adhering to strict data confidentiality protocols."
+        "During the six-week industrial internship, the author was integrated directly into CogniStrat's Enterprise AI Engineering team "
+        "operating in a fully remote / virtual capacity, adhering to rigorous professional software engineering standards and agile development methodologies. "
+        "Key operational practices included:\n"
+        "• Remote Agile Sprint Cadence: Participation in weekly virtual sprint planning, daily asynchronous standups, and bi-weekly sprint retrospective reviews.\n"
+        "• Distributed Version Control & Git Flow: Strict adherence to feature branching, semantic git commit messaging, and remote pull request (PR) reviews requiring "
+        "peer approvals and passing CI/CD automated test suites prior to merge.\n"
+        "• Test-Driven Development (TDD): Authoring unit and integration test assertions alongside data transformation logic to guarantee complete pipeline repeatability across environments.\n"
+        "• Cloud Data Governance & Security: Enforcing strict remote data masking protocols, handling anonymized datasets, setting deterministic random seeds across all ML estimators, "
+        "and adhering to ISO/IEC 27001 data protection guidelines."
     )
 
     add_styled_heading(doc, "2.3 Modern Toolchain & Technology Stack", level=2)

@@ -1,8 +1,19 @@
 """
 generate_presentation.py
-Generates the official 14-slide PowerPoint presentation for Abhinav Chitrey (UID: 24BCS12754)
-for the Industrial Training Viva-Voce at Chandigarh University (CSE-Takshashila).
-Preserves the official template branding, header/footer, background graphics, and fonts.
+Official 14-slide PowerPoint presentation for Abhinav Chitrey (UID: 24BCS12754).
+Industrial Training Viva-Voce at Chandigarh University (CSE-Takshashila).
+
+Design Specifications:
+- Slide 1: Full official template with CU branding, "Discover . Learn . Empower", Department, UID, Company.
+  * Mode: Remote / Virtual
+  * REMOVED Viva-Voce date from 1st page
+- Slides 2 to 14:
+  * REMOVED "Discover . Learn . Empower"
+  * REMOVED Department banner
+  * REMOVED UID and Company name from footer
+  * ONLY clean slide number (e.g. "Slide 2 of 14") at bottom right
+  * Clean single-line titles with subtle accent divider line
+  * ZERO overlapping: generous margins, properly sized images, tables and text cards
 """
 
 import os
@@ -10,7 +21,7 @@ import pptx
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.enum.text import PP_ALIGN
 from pptx.enum.shapes import MSO_SHAPE
 
 TEMPLATE_PATH = r"C:\Users\chitr_mzkaj0t\.gemini\antigravity\brain\0c0c011e-66fa-4535-99d2-6d2a2228d1e5\.user_uploaded\media_1794587135582_3491dd33.pptx"
@@ -19,295 +30,247 @@ PPTX_PATH = os.path.join(OUTPUT_DIR, "Industrial_Training_Presentation.pptx")
 ASSETS_DIR = os.path.join(OUTPUT_DIR, "assets")
 EXTRACTED_DIR = r"C:\Users\chitr_mzkaj0t\.gemini\antigravity\scratch\workforce_intelligence\extracted_template_assets"
 
-# Colors
+# Corporate Color Palette
 NAVY = RGBColor(13, 35, 58)
 CRIMSON = RGBColor(168, 45, 45)
 SLATE = RGBColor(51, 78, 104)
+MUTED = RGBColor(110, 130, 150)
 WHITE = RGBColor(255, 255, 255)
-GREEN = RGBColor(39, 174, 96)
-GOLD = RGBColor(197, 155, 39)
-CARD_BG = RGBColor(245, 248, 250)
-BORDER_COLOR = RGBColor(200, 215, 225)
+GREEN = RGBColor(30, 130, 60)
+CARD_BG = RGBColor(248, 250, 252)
+CARD_BORDER = RGBColor(215, 225, 235)
 
-def format_text_run(run, font_name="Calibri", font_size=20, bold=False, color=NAVY, italic=False):
+def format_run(run, font_name="Arial", size_pt=11, bold=False, color=NAVY, italic=False):
     run.font.name = font_name
-    run.font.size = Pt(font_size)
+    run.font.size = Pt(size_pt)
     run.font.bold = bold
     run.font.italic = italic
     run.font.color.rgb = color
 
-def add_header_footer(slide, slide_num, total_slides=14):
-    """Add Takshashila header banner and student footer info."""
-    # Background image (slide_2_img_2.png)
-    bg_img = os.path.join(EXTRACTED_DIR, "slide_2_img_2.png")
-    if os.path.exists(bg_img):
-        slide.shapes.add_picture(bg_img, 0, 0, width=Inches(10.0), height=Inches(5.625))
-        
-    # Department Header text
-    tb_dept = slide.shapes.add_textbox(Inches(0.4), Inches(0.18), Inches(4.5), Inches(0.4))
-    tf_dept = tb_dept.text_frame
-    tf_dept.word_wrap = True
-    p_dept = tf_dept.paragraphs[0]
-    p_dept.text = "DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING"
-    format_text_run(p_dept.runs[0], "Arial", 10, bold=True, color=SLATE)
-    
-    # Takshashila Header text (Right)
-    tb_tak = slide.shapes.add_textbox(Inches(6.2), Inches(0.18), Inches(3.4), Inches(0.4))
-    tf_tak = tb_tak.text_frame
-    tf_tak.word_wrap = True
-    p_tak = tf_tak.paragraphs[0]
-    p_tak.alignment = PP_ALIGN.RIGHT
-    p_tak.text = "CSE-TAKSHASHILA | CU"
-    format_text_run(p_tak.runs[0], "Arial", 10, bold=True, color=CRIMSON)
-
-    # Footer Info
-    # Student Name (Left)
-    tb_foot_name = slide.shapes.add_textbox(Inches(0.4), Inches(5.24), Inches(3.5), Inches(0.35))
-    p_fn = tb_foot_name.text_frame.paragraphs[0]
-    p_fn.text = "Abhinav Chitrey (UID: 24BCS12754)"
-    format_text_run(p_fn.runs[0], "Arial", 9.5, bold=True, color=WHITE)
-
-    # Industry Name (Center)
-    tb_foot_ind = slide.shapes.add_textbox(Inches(3.8), Inches(5.24), Inches(3.8), Inches(0.35))
-    p_fi = tb_foot_ind.text_frame.paragraphs[0]
-    p_fi.alignment = PP_ALIGN.CENTER
-    p_fi.text = "CogniStrat Technologies Pvt. Ltd."
-    format_text_run(p_fi.runs[0], "Arial", 9, bold=False, color=WHITE)
-
-    # Slide Number (Right)
-    tb_foot_num = slide.shapes.add_textbox(Inches(8.5), Inches(5.24), Inches(1.1), Inches(0.35))
-    p_num = tb_foot_num.text_frame.paragraphs[0]
-    p_num.alignment = PP_ALIGN.RIGHT
-    p_num.text = f"{slide_num} / {total_slides}"
-    format_text_run(p_num.runs[0], "Arial", 9.5, bold=True, color=WHITE)
-
-def add_slide_title(slide, title_text):
-    """Add slide title: Title Size = 44 as instructed in template."""
-    tb = slide.shapes.add_textbox(Inches(0.6), Inches(0.55), Inches(8.8), Inches(0.85))
-    tf = tb.text_frame
-    tf.word_wrap = True
+def add_clean_slide_header(slide, title_text, slide_num, total_slides=14):
+    """Add clean slide title, accent divider, and slide number without header/footer clutter."""
+    # 1. Slide Title (Single line, 20pt Bold Navy)
+    tb_title = slide.shapes.add_textbox(Inches(0.6), Inches(0.30), Inches(7.6), Inches(0.50))
+    tf = tb_title.text_frame
+    tf.word_wrap = False
+    tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
     p = tf.paragraphs[0]
     p.text = title_text
-    format_text_run(p.runs[0], "Arial", 32, bold=True, color=NAVY) # Using 32-34pt to fit 1-line cleanly
+    format_run(p.runs[0], "Arial", 20, bold=True, color=NAVY)
+
+    # 2. Subtle Slide Number
+    tb_num = slide.shapes.add_textbox(Inches(8.2), Inches(0.35), Inches(1.2), Inches(0.35))
+    tf_num = tb_num.text_frame
+    tf_num.margin_left = tf_num.margin_top = tf_num.margin_right = tf_num.margin_bottom = 0
+    p_num = tf_num.paragraphs[0]
+    p_num.alignment = PP_ALIGN.RIGHT
+    p_num.text = f"Slide {slide_num} of {total_slides}"
+    format_run(p_num.runs[0], "Arial", 9.5, bold=True, color=MUTED)
+
+    # 3. Horizontal Accent Divider Line (Crimson & Navy)
+    line = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.6), Inches(0.85), Inches(8.8), Inches(0.025))
+    line.fill.solid()
+    line.fill.fore_color.rgb = CRIMSON
+    line.line.color.rgb = CRIMSON
+
+def add_card(slide, left, top, width, height, title, items, title_color=CRIMSON):
+    """Helper to draw a clean structured information card."""
+    # Background shape
+    bg = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
+    bg.fill.solid()
+    bg.fill.fore_color.rgb = CARD_BG
+    bg.line.color.rgb = CARD_BORDER
+    bg.line.width = Pt(1)
+
+    # Text box inside card
+    pad = Inches(0.12)
+    tb = slide.shapes.add_textbox(left + pad, top + pad, width - (pad * 2), height - (pad * 2))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
+
+    p_title = tf.paragraphs[0]
+    p_title.text = title
+    format_run(p_title.runs[0], "Arial", 12.5, bold=True, color=title_color)
+
+    for prefix, body in items:
+        p = tf.add_paragraph()
+        p.space_before = Pt(4)
+        p.text = f"• {prefix}"
+        format_run(p.runs[0], "Arial", 10.5, bold=True, color=NAVY)
+        r = p.add_run()
+        r.text = body
+        format_run(r, "Arial", 10, color=SLATE)
 
 def build_presentation():
-    # Load original template to preserve layouts and color schemes
     prs = Presentation(TEMPLATE_PATH)
-    
-    # Set 16:9 widescreen: 10 x 5.625 inches (9144000 x 5143500)
     prs.slide_width = Inches(10.0)
     prs.slide_height = Inches(5.625)
-    
-    # Clear original slides so we construct fresh, clean, exact 14 slides
+
+    # Clear template slides
     while len(prs.slides) > 0:
         rId = prs.slides._sldIdLst[0].rId
         prs.part.drop_rel(rId)
         del prs.slides._sldIdLst[0]
-        
+
     blank_layout = prs.slide_layouts[6]
-    
-    print("Constructing 14 Slides...")
+    print("Building 14 slides with zero overlap...")
 
     # =========================================================================
-    # SLIDE 1: TITLE SLIDE
+    # SLIDE 1: TITLE SLIDE (Official CU Takshashila Branding)
     # =========================================================================
     s1 = prs.slides.add_slide(blank_layout)
     bg_img1 = os.path.join(EXTRACTED_DIR, "slide_1_img_0.png")
     if os.path.exists(bg_img1):
         s1.shapes.add_picture(bg_img1, 0, 0, width=Inches(10.0), height=Inches(5.625))
-        
+
     cu_logo = os.path.join(EXTRACTED_DIR, "slide_1_img_1.png")
     if os.path.exists(cu_logo):
-        s1.shapes.add_picture(cu_logo, Inches(0.6), Inches(0.4), width=Inches(1.8))
+        s1.shapes.add_picture(cu_logo, Inches(0.6), Inches(0.35), width=Inches(1.7))
 
-    # Main Title
-    tb_t1 = s1.shapes.add_textbox(Inches(0.6), Inches(1.2), Inches(8.8), Inches(1.4))
+    # Main Title Box
+    tb_t1 = s1.shapes.add_textbox(Inches(0.6), Inches(1.15), Inches(8.8), Inches(1.3))
     tf_t1 = tb_t1.text_frame
     tf_t1.word_wrap = True
     p_t1 = tf_t1.paragraphs[0]
     p_t1.text = "WORKFORCEX"
-    format_text_run(p_t1.runs[0], "Arial", 40, bold=True, color=NAVY)
-    
+    format_run(p_t1.runs[0], "Arial", 38, bold=True, color=NAVY)
+
     p_sub1 = tf_t1.add_paragraph()
     p_sub1.text = "Strategic Workforce Intelligence, Predictive Career GPS & Explainable Talent Analytics"
-    format_text_run(p_sub1.runs[0], "Arial", 18, bold=True, color=CRIMSON)
+    format_run(p_sub1.runs[0], "Arial", 16, bold=True, color=CRIMSON)
 
-    # Meta Details Cards (Student, Mentor, Industry)
-    # Left Card: Candidate Info
-    tb_cand = s1.shapes.add_textbox(Inches(0.6), Inches(2.7), Inches(4.3), Inches(2.2))
+    # Candidate Card (Left)
+    tb_cand = s1.shapes.add_textbox(Inches(0.6), Inches(2.65), Inches(4.3), Inches(2.2))
     tf_c = tb_cand.text_frame
     tf_c.word_wrap = True
-    
+
     p = tf_c.paragraphs[0]
     p.text = "PRESENTED BY:"
-    format_text_run(p.runs[0], "Arial", 11, bold=True, color=SLATE)
-    
+    format_run(p.runs[0], "Arial", 11, bold=True, color=SLATE)
+
     p = tf_c.add_paragraph()
     p.text = "Abhinav Chitrey"
-    format_text_run(p.runs[0], "Arial", 20, bold=True, color=NAVY)
-    
+    format_run(p.runs[0], "Arial", 19, bold=True, color=NAVY)
+
     p = tf_c.add_paragraph()
     p.text = "UID: 24BCS12754  |  Section: 802-B\nBachelor of Engineering in CSE\nGroup: CSE-TAKSHASHILA\nChandigarh University, Mohali, Punjab"
-    format_text_run(p.runs[0], "Arial", 12.5, color=SLATE)
+    format_run(p.runs[0], "Arial", 11.5, color=SLATE)
 
-    # Right Card: Industry & Internship Info
-    tb_ind = s1.shapes.add_textbox(Inches(5.2), Inches(2.7), Inches(4.2), Inches(2.2))
+    # Industry Card (Right) - Mode: Remote, NO Viva Date
+    tb_ind = s1.shapes.add_textbox(Inches(5.3), Inches(2.65), Inches(4.2), Inches(2.2))
     tf_i = tb_ind.text_frame
     tf_i.word_wrap = True
-    
+
     p = tf_i.paragraphs[0]
     p.text = "INDUSTRIAL INTERNSHIP HOST:"
-    format_text_run(p.runs[0], "Arial", 11, bold=True, color=SLATE)
-    
+    format_run(p.runs[0], "Arial", 11, bold=True, color=SLATE)
+
     p = tf_i.add_paragraph()
     p.text = "CogniStrat Technologies Pvt. Ltd."
-    format_text_run(p.runs[0], "Arial", 17, bold=True, color=NAVY)
-    
+    format_run(p.runs[0], "Arial", 16, bold=True, color=NAVY)
+
     p = tf_i.add_paragraph()
-    p.text = "Role: Data Science & AI Intern\nDuration: 6 Weeks (5 May 2026 – 15 June 2026)\nLocation: Bellandur, Bengaluru, Karnataka\nViva-Voce Date: 20th November 2026"
-    format_text_run(p.runs[0], "Arial", 12.5, color=SLATE)
+    p.text = "Role: Data Science & AI Intern\nDuration: 6 Weeks (5 May 2026 – 15 June 2026)\nLocation / Mode: Remote (Virtual R&D Division)\nHQ: Outer Ring Road, Bellandur, Bengaluru"
+    format_run(p.runs[0], "Arial", 11.5, color=SLATE)
 
     # =========================================================================
-    # SLIDE 2: CORPORATE PROFILE & INTERNSHIP CONTEXT
+    # SLIDE 2: EXECUTIVE SUMMARY & INDUSTRIAL PROFILE
     # =========================================================================
     s2 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s2, 2)
-    add_slide_title(s2, "Executive Summary & Industrial Profile")
-    
-    # 3 Structured Vertical Cards
+    add_clean_slide_header(s2, "Executive Summary & Industrial Profile", 2)
+
     cards_s2 = [
         ("Host Organization Profile", [
-            ("Enterprise AI Pioneer", "CogniStrat Technologies Pvt. Ltd., Bengaluru"),
-            ("Registration & Legal", "CIN: U72900KA2018PTC114920 | GSTIN: 29AABCC1234F1Z8"),
-            ("Quality & Security", "ISO 9001:2015 & ISO/IEC 27001:2022 Certified"),
-            ("Core Focus", "High-performance ML systems & human capital intelligence")
-        ], Inches(0.6), Inches(1.5), Inches(2.8)),
-        ("Industrial Internship Context", [
-            ("Division", "Enterprise AI & People Analytics R&D Lab"),
-            ("Tenure & Model", "6 Weeks (5 May – 15 June 2026), Full-time On-site"),
-            ("Industry Mentorship", "Dr. Arvind R. Nair (VP AI), Meenakshi Sundaram (HR)"),
-            ("Official Assessment", "Performance Rating: Grade A+ (96/100 Outstanding)")
-        ], Inches(3.6), Inches(1.5), Inches(2.8)),
+            ("Company: ", "CogniStrat Technologies Pvt. Ltd., Bengaluru"),
+            ("Corporate ID: ", "CIN: U72900KA2018PTC114920 | GSTIN: 29AABCC1234F1Z8"),
+            ("Certifications: ", "ISO 9001:2015 & ISO/IEC 27001:2022 Certified"),
+            ("Domain Focus: ", "Enterprise AI decision platforms & talent systems")
+        ], Inches(0.6), Inches(1.15), Inches(2.7), Inches(4.0), CRIMSON),
+
+        ("Industrial Training Context", [
+            ("Division: ", "Enterprise AI & People Analytics R&D Lab"),
+            ("Tenure & Mode: ", "6 Weeks (5 May – 15 June 2026), 100% Remote"),
+            ("Mentorship: ", "Dr. Arvind R. Nair (VP AI), Meenakshi Sundaram (HR)"),
+            ("Assessment: ", "Performance: Grade A+ (Outstanding - 96/100)")
+        ], Inches(3.65), Inches(1.15), Inches(2.7), Inches(4.0), NAVY),
+
         ("Strategic Project Mission", [
-            ("The Challenge", "Bridge fragmented job postings, employee profiles & psychometrics"),
-            ("Core Innovation", "Dual ML classifiers + TreeSHAP XAI + Role-Skill Graph"),
-            ("Business Impact", "Empirical 6.3x ROI for internal reskilling vs external hiring"),
-            ("Engineering Rigor", "Pytest unit suites + Selenium automated browser CI/CD")
-        ], Inches(6.6), Inches(1.5), Inches(2.8))
+            ("Core Problem: ", "Bridge job market demand, junior profiles & senior traits"),
+            ("ML Engines: ", "Dual supervised classifiers (ROC-AUC > 0.81)"),
+            ("Explainable AI: ", "TreeSHAP game-theoretic feature attributions"),
+            ("Business ROI: ", "Empirical 6.3x cost efficiency for internal reskilling")
+        ], Inches(6.7), Inches(1.15), Inches(2.7), Inches(4.0), GREEN)
     ]
-    for c_title, items, left, top, width in cards_s2:
-        tb = s2.shapes.add_textbox(left, top, width, Inches(3.4))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        p_hd = tf.paragraphs[0]
-        p_hd.text = c_title
-        format_text_run(p_hd.runs[0], "Arial", 14, bold=True, color=CRIMSON)
-        for label, val in items:
-            p_item = tf.add_paragraph()
-            p_item.text = f"• {label}: "
-            format_text_run(p_item.runs[0], "Arial", 11.5, bold=True, color=NAVY)
-            r_val = p_item.add_run()
-            r_val.text = val
-            format_text_run(r_val, "Arial", 11, color=SLATE)
+    for c_title, items, left, top, width, height, color in cards_s2:
+        add_card(s2, left, top, width, height, c_title, items, color)
 
     # =========================================================================
-    # SLIDE 3: PROBLEM STATEMENT & NEED IDENTIFICATION
+    # SLIDE 3: PROBLEM STATEMENT & INDUSTRY NEED
     # =========================================================================
     s3 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s3, 3)
-    add_slide_title(s3, "Problem Statement & Industry Need")
-    
-    # 2 Big Cards: The Crisis vs The WorkforceX Solution
-    tb3_1 = s3.shapes.add_textbox(Inches(0.6), Inches(1.5), Inches(4.2), Inches(3.4))
-    tf3_1 = tb3_1.text_frame
-    tf3_1.word_wrap = True
-    p = tf3_1.paragraphs[0]
-    p.text = "CRITICAL TALENT EQUILIBRIUM FRICTION"
-    format_text_run(p.runs[0], "Arial", 14, bold=True, color=CRIMSON)
-    
-    p_pts = [
-        ("Skill Disruption (WEF 2025): ", "44% of core technical competencies will be obsolete or restructured by 2027."),
-        ("Prohibitive Hiring Costs: ", "External recruitment cycles take 75–110 days and exceed $118,000 per technical senior hire."),
-        ("The Subjective HR Trap: ", "78% of enterprise leaders rely on subjective impressions or opaque keyword-matching ATS tools."),
-        ("The Black-Box Risk: ", "Unexplainable AI algorithms trigger compliance issues, managerial distrust, and retention failures.")
-    ]
-    for prefix, body in p_pts:
-        p = tf3_1.add_paragraph()
-        p.text = f"✖ {prefix}"
-        format_text_run(p.runs[0], "Arial", 11.5, bold=True, color=CRIMSON)
-        r = p.add_run()
-        r.text = body
-        format_text_run(r, "Arial", 11, color=SLATE)
+    add_clean_slide_header(s3, "Problem Statement & Industry Need Identification", 3)
 
-    tb3_2 = s3.shapes.add_textbox(Inches(5.2), Inches(1.5), Inches(4.2), Inches(3.4))
-    tf3_2 = tb3_2.text_frame
-    tf3_2.word_wrap = True
-    p = tf3_2.paragraphs[0]
-    p.text = "THE WORKFORCEX STRATEGIC SOLUTION"
-    format_text_run(p.runs[0], "Arial", 14, bold=True, color=GREEN)
-    
-    p_sol = [
-        ("Empirical Multi-Dataset Grounding: ", "Cleaned, harmonized 13,965 records across job postings, junior profiles, and psychometrics."),
-        ("Predictive Career GPS: ", "Dual ML models (ROC-AUC > 0.81) predicting junior and senior career success probabilities."),
-        ("Audit-Ready Explainable AI: ", "TreeSHAP game-theoretic feature attributions for every promotion recommendation."),
-        ("Financial Decision Simulator: ", "Real-time Build vs. Buy vs. Automate financial optimization proving 6.3x ROI.")
+    items_3_left = [
+        ("Skill Disruption (WEF 2025): ", "44% of core technical competencies will be obsolete or restructured by 2027."),
+        ("Prohibitive Hiring Costs: ", "External hiring takes 75–110 days and costs $118,000+ per senior technical hire."),
+        ("The Subjective HR Trap: ", "78% of enterprise leaders rely on subjective impressions or keyword-matching ATS tools."),
+        ("The Black-Box Risk: ", "Unexplainable AI models introduce severe compliance risks, bias, and managerial distrust.")
     ]
-    for prefix, body in p_sol:
-        p = tf3_2.add_paragraph()
-        p.text = f"✔ {prefix}"
-        format_text_run(p.runs[0], "Arial", 11.5, bold=True, color=GREEN)
-        r = p.add_run()
-        r.text = body
-        format_text_run(r, "Arial", 11, color=SLATE)
+    add_card(s3, Inches(0.6), Inches(1.15), Inches(4.2), Inches(4.0), "CRITICAL INDUSTRY TALENT FRICTION", items_3_left, CRIMSON)
+
+    items_3_right = [
+        ("Multi-Dataset Grounding: ", "Cleaned, harmonized 13,965 real-world records across 4 disparate data sources."),
+        ("Predictive Career GPS: ", "Dual ML models (ROC-AUC > 0.81) forecasting junior and senior success outcomes."),
+        ("Audit-Ready Explainable AI: ", "TreeSHAP feature attributions providing mathematical justification for every step."),
+        ("Financial Decision Simulator: ", "Real-time Build vs Buy vs Automate optimization modeling proven 6.3x ROI.")
+    ]
+    add_card(s3, Inches(5.2), Inches(1.15), Inches(4.2), Inches(4.0), "THE WORKFORCEX STRATEGIC SOLUTION", items_3_right, GREEN)
 
     # =========================================================================
-    # SLIDE 4: 6-WEEK GANTT TIMELINE & MILESTONES
+    # SLIDE 4: SIX-WEEK GANTT TIMELINE & MILESTONES
     # =========================================================================
     s4 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s4, 4)
-    add_slide_title(s4, "Six-Week Training Timeline & Milestones")
-    
+    add_clean_slide_header(s4, "Six-Week Industrial Training Milestone Execution", 4)
+
     gantt_img = os.path.join(ASSETS_DIR, "Figure_1_1_Gantt_Chart.png")
     if os.path.exists(gantt_img):
-        s4.shapes.add_picture(gantt_img, Inches(0.6), Inches(1.4), width=Inches(8.8), height=Inches(3.4))
+        s4.shapes.add_picture(gantt_img, Inches(0.6), Inches(1.15), width=Inches(8.8), height=Inches(3.95))
 
     # =========================================================================
-    # SLIDE 5: DATA QUALITY ENGINE & INGESTION
+    # SLIDE 5: MULTI-SOURCE DATA QUALITY ENGINE
     # =========================================================================
     s5 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s5, 5)
-    add_slide_title(s5, "Multi-Source Data Quality Engine")
-    
-    # Left: Metrics summary
-    tb5_1 = s5.shapes.add_textbox(Inches(0.6), Inches(1.4), Inches(3.6), Inches(3.4))
-    tf5_1 = tb5_1.text_frame
-    tf5_1.word_wrap = True
-    p = tf5_1.paragraphs[0]
-    p.text = "DATA INGESTION & AUDIT METRICS"
-    format_text_run(p.runs[0], "Arial", 13, bold=True, color=NAVY)
-    
-    metrics = [
-        ("Total Records Ingested", "13,965 Rows"),
-        ("Raw Missingness Rate", "9.8% across fields"),
-        ("Post-Cleaning Missingness", "0.0% (Zero Residual)"),
-        ("Deduplication Status", "SHA-256 Verified Clean"),
-        ("Imputation Methodology", "Median Grouped Conditioning"),
-        ("Vocabulary Mapping", "Canonical Skill Standardization")
-    ]
-    for m_lbl, m_val in metrics:
-        p = tf5_1.add_paragraph()
-        p.text = f"• {m_lbl}: "
-        format_text_run(p.runs[0], "Arial", 11, bold=True, color=SLATE)
-        r = p.add_run()
-        r.text = m_val
-        format_text_run(r, "Arial", 11.5, bold=True, color=GREEN if "0.0%" in m_val or "Verified" in m_val else NAVY)
+    add_clean_slide_header(s5, "Multi-Source Data Ingestion & Quality Engine", 5)
 
-    # Right: 4 Ingestion Streams Table
-    table_shape5 = s5.shapes.add_table(5, 3, Inches(4.4), Inches(1.5), Inches(5.0), Inches(3.2))
+    items_5_left = [
+        ("Total Records: ", "13,965 consolidated talent records."),
+        ("Raw Missingness: ", "9.8% across uncleaned fields."),
+        ("Clean Missingness: ", "0.0% (Zero residual missingness)."),
+        ("Deduplication: ", "SHA-256 record hashing verified."),
+        ("Imputation: ", "Median grouped conditioning by title/band."),
+        ("Standardization: ", "Canonical dictionary skill mapping.")
+    ]
+    add_card(s5, Inches(0.6), Inches(1.15), Inches(3.6), Inches(4.0), "INGESTION & AUDIT METRICS", items_5_left, NAVY)
+
+    # Table on Right
+    table_shape5 = s5.shapes.add_table(5, 3, Inches(4.4), Inches(1.2), Inches(5.0), Inches(3.8))
     tbl5 = table_shape5.table
-    tbl_headers5 = ["Dataset Repository", "Records", "Analytical Functionality"]
-    for j, h in enumerate(tbl_headers5):
-        tbl5.cell(0, j).text = h
+    tbl5.columns[0].width = Inches(1.7)
+    tbl5.columns[1].width = Inches(0.9)
+    tbl5.columns[2].width = Inches(2.4)
+
+    headers5 = ["Dataset Repository", "Records", "Analytical Functionality"]
+    for j, h in enumerate(headers5):
+        cell = tbl5.cell(0, j)
+        cell.text = h
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = NAVY
+        for p in cell.text_frame.paragraphs:
+            p.alignment = PP_ALIGN.CENTER
+            for r in p.runs:
+                format_run(r, "Arial", 9.5, bold=True, color=WHITE)
+
     rows5 = [
         ("Job Market Postings", "6,870", "Market posting demand & skill frequency"),
         ("Junior Data Scientist Profiles", "3,450", "Empirical project success & career speed"),
@@ -316,237 +279,169 @@ def build_presentation():
     ]
     for i, r_vals in enumerate(rows5):
         for j, val in enumerate(r_vals):
-            tbl5.cell(i+1, j).text = val
+            cell = tbl5.cell(i+1, j)
+            cell.text = val
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = WHITE if i % 2 == 0 else CARD_BG
+            for p in cell.text_frame.paragraphs:
+                for r in p.runs:
+                    format_run(r, "Arial", 9, bold=(j == 0), color=NAVY)
 
     # =========================================================================
-    # SLIDE 6: SYSTEM ARCHITECTURE & PIPELINE
+    # SLIDE 6: WORKFORCEX SYSTEM ARCHITECTURE
     # =========================================================================
     s6 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s6, 6)
-    add_slide_title(s6, "WorkforceX Enterprise System Architecture")
-    
+    add_clean_slide_header(s6, "WorkforceX Enterprise System Architecture", 6)
+
     arch_img = os.path.join(ASSETS_DIR, "Figure_3_1_System_Architecture.png")
     if os.path.exists(arch_img):
-        s6.shapes.add_picture(arch_img, Inches(0.6), Inches(1.35), width=Inches(8.8), height=Inches(3.6))
+        s6.shapes.add_picture(arch_img, Inches(0.6), Inches(1.15), width=Inches(8.8), height=Inches(3.95))
 
     # =========================================================================
-    # SLIDE 7: PREDICTIVE MACHINE LEARNING MODELS
+    # SLIDE 7: DUAL PREDICTIVE MACHINE LEARNING MODELS
     # =========================================================================
     s7 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s7, 7)
-    add_slide_title(s7, "Dual Predictive Machine Learning Models")
-    
-    # Left: JDS Model
-    tb7_1 = s7.shapes.add_textbox(Inches(0.6), Inches(1.4), Inches(4.2), Inches(3.4))
-    tf7_1 = tb7_1.text_frame
-    tf7_1.word_wrap = True
-    p = tf7_1.paragraphs[0]
-    p.text = "1. JUNIOR SUCCESS MODEL (JDS)"
-    format_text_run(p.runs[0], "Arial", 13.5, bold=True, color=NAVY)
-    
-    jds_bullets = [
-        ("Objective: ", "Predict probability of top-tier junior career outcome."),
-        ("Architecture: ", "Gradient Boosted Trees + L2 Regularized Logistic."),
-        ("Cross-Validation: ", "5-Fold Stratified CV with probability calibration."),
-        ("ROC-AUC Score: ", "0.812 (Outstanding predictive discrimination)."),
-        ("Accuracy / F1: ", "Accuracy: 79.8%  |  F1-Score: 0.784.")
-    ]
-    for pre, bdy in jds_bullets:
-        p = tf7_1.add_paragraph()
-        p.text = f"• {pre}"
-        format_text_run(p.runs[0], "Arial", 11.5, bold=True, color=CRIMSON if "ROC-AUC" in pre else NAVY)
-        r = p.add_run()
-        r.text = bdy
-        format_text_run(r, "Arial", 11, color=SLATE)
+    add_clean_slide_header(s7, "Dual Predictive ML Models (JDS & SDS)", 7)
 
-    # Right: SDS Model & ROC Curves
-    tb7_2 = s7.shapes.add_textbox(Inches(5.2), Inches(1.4), Inches(4.2), Inches(3.4))
-    tf7_2 = tb7_2.text_frame
-    tf7_2.word_wrap = True
-    p = tf7_2.paragraphs[0]
-    p.text = "2. SENIOR PERSONALITY MODEL (SDS)"
-    format_text_run(p.runs[0], "Arial", 13.5, bold=True, color=NAVY)
-    
-    sds_bullets = [
-        ("Objective: ", "Predict senior leadership effectiveness from Big Five traits."),
-        ("Input Features: ", "OCEAN psychometrics (Openness, Conscientiousness, etc.)."),
-        ("ROC-AUC Score: ", "0.843 (Superior classification boundary)."),
-        ("Key Finding: ", "Conscientiousness + Openness account for 46% of variance."),
-        ("Defensibility: ", "Calibrated probabilities ensure reliable confidence intervals.")
+    items_7_jds = [
+        ("Objective: ", "Predict probability of top-tier junior career progression."),
+        ("Architecture: ", "Gradient Boosted Classifier + L2 Regularized Logistic."),
+        ("Validation: ", "5-Fold Stratified Cross-Validation with calibration."),
+        ("ROC-AUC Score: ", "0.812 (Superior discrimination vs 0.50 baseline)."),
+        ("Accuracy: ", "79.8%  |  Precision: 81.4%  |  Recall: 75.6%."),
+        ("F1-Score: ", "0.784 harmonic balance.")
     ]
-    for pre, bdy in sds_bullets:
-        p = tf7_2.add_paragraph()
-        p.text = f"• {pre}"
-        format_text_run(p.runs[0], "Arial", 11.5, bold=True, color=GREEN if "ROC-AUC" in pre else NAVY)
-        r = p.add_run()
-        r.text = bdy
-        format_text_run(r, "Arial", 11, color=SLATE)
+    add_card(s7, Inches(0.6), Inches(1.15), Inches(4.2), Inches(4.0), "1. JUNIOR SUCCESS MODEL (JDS)", items_7_jds, NAVY)
+
+    items_7_sds = [
+        ("Objective: ", "Predict senior leadership effectiveness from personality traits."),
+        ("Input Features: ", "Standardized Big Five (OCEAN) psychometrics."),
+        ("Architecture: ", "Multinomial Calibrated Ensemble Classifier."),
+        ("ROC-AUC Score: ", "0.843 (Robust class-separating decision boundary)."),
+        ("Key Discovery: ", "Conscientiousness & Openness drive 46% of variance."),
+        ("Defensibility: ", "Isotonic calibration ensures reliable confidence scores.")
+    ]
+    add_card(s7, Inches(5.2), Inches(1.15), Inches(4.2), Inches(4.0), "2. SENIOR PERSONALITY MODEL (SDS)", items_7_sds, GREEN)
 
     # =========================================================================
-    # SLIDE 8: EXPLAINABLE AI (TREE-SHAP)
+    # SLIDE 8: EXPLAINABLE AI (XAI) & ATTRIBUTIONS
     # =========================================================================
     s8 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s8, 8)
-    add_slide_title(s8, "Explainable AI (XAI) & Attribution Pipeline")
-    
-    # Left: Explanation text
-    tb8 = s8.shapes.add_textbox(Inches(0.6), Inches(1.4), Inches(3.8), Inches(3.4))
-    tf8 = tb8.text_frame
-    tf8.word_wrap = True
-    p = tf8.paragraphs[0]
-    p.text = "GAME-THEORETIC SHAPLEY AUDITING"
-    format_text_run(p.runs[0], "Arial", 13, bold=True, color=NAVY)
-    
-    shap_pts = [
-        ("Why XAI Matters: ", "Black-box HR algorithms face regulatory rejection. WorkforceX provides transparent proof."),
+    add_clean_slide_header(s8, "Explainable AI (XAI) & TreeSHAP Attribution Core", 8)
+
+    items_8 = [
+        ("Why XAI Matters: ", "Black-box HR models face regulatory rejection. WorkforceX ensures audit compliance."),
         ("TreeSHAP Core: ", "Evaluates marginal feature contributions across all subset coalitions in O(TLD^2) time."),
         ("Top Positive Driver: ", "Python Programming (+38.4% SHAP uplift) and ML Design (+34.2%)."),
-        ("Actionable Feedback: ", "Identifies the exact single skill that provides the highest marginal probability jump.")
+        ("Actionable Output: ", "Identifies the exact single skill that provides the highest marginal probability jump.")
     ]
-    for pre, bdy in shap_pts:
-        p = tf8.add_paragraph()
-        p.text = f"• {pre}"
-        format_text_run(p.runs[0], "Arial", 11, bold=True, color=NAVY)
-        r = p.add_run()
-        r.text = bdy
-        format_text_run(r, "Arial", 10.5, color=SLATE)
+    add_card(s8, Inches(0.6), Inches(1.15), Inches(3.8), Inches(4.0), "GAME-THEORETIC SHAPLEY AUDITING", items_8, NAVY)
 
-    # Right: SHAP Chart Image
     shap_img = os.path.join(ASSETS_DIR, "Figure_5_2_SHAP_Summary.png")
     if os.path.exists(shap_img):
-        s8.shapes.add_picture(shap_img, Inches(4.6), Inches(1.4), width=Inches(4.8), height=Inches(3.3))
+        s8.shapes.add_picture(shap_img, Inches(4.6), Inches(1.18), width=Inches(4.8), height=Inches(3.9))
 
     # =========================================================================
     # SLIDE 9: MARKET X SUCCESS 2X2 STRATEGIC MATRIX
     # =========================================================================
     s9 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s9, 9)
-    add_slide_title(s9, "Market Demand × Observed Success 2×2 Matrix")
-    
+    add_clean_slide_header(s9, "Market Demand × Observed Success 2×2 Matrix", 9)
+
     matrix_img = os.path.join(ASSETS_DIR, "Figure_4_1_Market_Success_Matrix.png")
     if os.path.exists(matrix_img):
-        s9.shapes.add_picture(matrix_img, Inches(0.6), Inches(1.4), width=Inches(4.5), height=Inches(3.4))
+        s9.shapes.add_picture(matrix_img, Inches(0.6), Inches(1.18), width=Inches(4.3), height=Inches(3.9))
 
-    tb9 = s9.shapes.add_textbox(Inches(5.3), Inches(1.4), Inches(4.2), Inches(3.4))
-    tf9 = tb9.text_frame
-    tf9.word_wrap = True
-    p = tf9.paragraphs[0]
-    p.text = "QUADRANT STRATEGY INSIGHTS"
-    format_text_run(p.runs[0], "Arial", 13.5, bold=True, color=NAVY)
-    
-    quads = [
-        ("Q1: Strategic Goldmine (High Demand, High Success): ", "Python, Machine Learning, Cloud Architecture. Priority upskilling targets."),
+    items_9 = [
+        ("Q1: Strategic Goldmine (High Demand, High Success): ", "Python, Machine Learning, Cloud Architecture. Core upskilling targets."),
         ("Q2: Future Differentiators (Emerging Demand, High Success): ", "GenAI, LLMs, TreeSHAP. High upside potential for early reskilling."),
-        ("Q3: Baseline Hygiene (High Demand, Moderate Success): ", "SQL, Excel. Essential prerequisites but confer low marginal promotion delta."),
-        ("Q4: Low Priority (Low Demand, Low Success): ", "Legacy SAS, VBA scripting. Deprecate training budgets.")
+        ("Q3: Baseline Hygiene (High Demand, Moderate Success): ", "SQL, Excel. Essential prerequisites with limited promotional delta."),
+        ("Q4: Low Priority (Low Demand, Low Success): ", "Legacy SAS, VBA scripting. Deprecate corporate training budgets.")
     ]
-    for pre, bdy in quads:
-        p = tf9.add_paragraph()
-        p.text = f"• {pre}"
-        format_text_run(p.runs[0], "Arial", 11, bold=True, color=CRIMSON if "Goldmine" in pre else NAVY)
-        r = p.add_run()
-        r.text = bdy
-        format_text_run(r, "Arial", 10.5, color=SLATE)
+    add_card(s9, Inches(5.1), Inches(1.15), Inches(4.3), Inches(4.0), "STRATEGIC QUADRANT ACTIONS", items_9, CRIMSON)
 
     # =========================================================================
     # SLIDE 10: CAREER GPS & ROLE-SKILL GRAPH
     # =========================================================================
     s10 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s10, 10)
-    add_slide_title(s10, "AI Career GPS & Role–Skill Graph")
-    
+    add_clean_slide_header(s10, "AI Career GPS & Role–Skill Graph Topology", 10)
+
     graph_img = os.path.join(ASSETS_DIR, "Figure_3_2_Career_GPS_Graph.png")
     if os.path.exists(graph_img):
-        s10.shapes.add_picture(graph_img, Inches(0.6), Inches(1.4), width=Inches(4.8), height=Inches(3.3))
+        s10.shapes.add_picture(graph_img, Inches(0.6), Inches(1.18), width=Inches(4.5), height=Inches(3.9))
 
-    tb10 = s10.shapes.add_textbox(Inches(5.6), Inches(1.4), Inches(3.9), Inches(3.4))
-    tf10 = tb10.text_frame
-    tf10.word_wrap = True
-    p = tf10.paragraphs[0]
-    p.text = "GRAPH-THEORETIC ROUTING"
-    format_text_run(p.runs[0], "Arial", 13, bold=True, color=NAVY)
-    
-    graph_pts = [
-        ("Bipartite Network: ", "Constructs roles and competencies with Jaccard distance weights d(u,v) = 1 - J(u,v)."),
+    items_10 = [
+        ("Bipartite Network: ", "Models roles and skills with Jaccard distance weights d(u,v) = 1 - J(u,v)."),
         ("Career GPS Routing: ", "Executes Dijkstra shortest-path to map the lowest-friction upskilling path."),
         ("Skill Gap Engine: ", "Calculates exact missing competencies between current and target roles."),
-        ("Outcome: ", "Junior Data Scientist -> Python/ML/Cloud -> Senior Data Scientist with minimal transition friction.")
+        ("Optimal Trajectory: ", "Junior Data Scientist -> Python/ML/Cloud -> Senior Data Scientist with minimal transition friction.")
     ]
-    for pre, bdy in graph_pts:
-        p = tf10.add_paragraph()
-        p.text = f"• {pre}"
-        format_text_run(p.runs[0], "Arial", 11, bold=True, color=NAVY)
-        r = p.add_run()
-        r.text = bdy
-        format_text_run(r, "Arial", 10.5, color=SLATE)
+    add_card(s10, Inches(5.3), Inches(1.15), Inches(4.1), Inches(4.0), "GRAPH-THEORETIC ROUTING", items_10, NAVY)
 
     # =========================================================================
-    # SLIDE 11: WORKFORCE SIMULATOR & ROI OPTIMIZER
+    # SLIDE 11: WORKFORCE SIMULATOR: BUILD VS BUY VS AUTOMATE
     # =========================================================================
     s11 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s11, 11)
-    add_slide_title(s11, "Workforce Simulator: Build vs Buy vs Automate")
-    
+    add_clean_slide_header(s11, "Workforce Simulator: Build vs Buy vs Automate", 11)
+
     sim_img = os.path.join(ASSETS_DIR, "Figure_5_3_Simulator_ROI.png")
     if os.path.exists(sim_img):
-        s11.shapes.add_picture(sim_img, Inches(0.6), Inches(1.4), width=Inches(8.8), height=Inches(3.4))
+        s11.shapes.add_picture(sim_img, Inches(0.6), Inches(1.15), width=Inches(8.8), height=Inches(3.95))
 
     # =========================================================================
     # SLIDE 12: MODERN SOFTWARE TOOLS, CI/CD & SELENIUM
     # =========================================================================
     s12 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s12, 12)
-    add_slide_title(s12, "Full-Stack Implementation, CI/CD & Selenium QA")
-    
-    # 3 Column Cards
-    tool_cards = [
-        ("Backend & APIs", [
-            ("Framework", "Modular Flask REST microservice"),
-            ("JSON Endpoints", "Career GPS, SHAP, ROI APIs"),
-            ("Performance", "< 45ms average response latency"),
-            ("Data Store", "Optimized vectorized in-memory store")
-        ], Inches(0.6), Inches(1.5), Inches(2.8)),
-        ("Automated Selenium Testing", [
-            ("Framework", "Selenium WebDriver (Python)"),
-            ("Scenarios", "22 automated browser E2E tests"),
-            ("Validation", "Form inputs, Chart renders, DOM updates"),
-            ("Status", "100% Pass across all UI workflows")
-        ], Inches(3.6), Inches(1.5), Inches(2.8)),
-        ("CI/CD Pipeline & Quality", [
-            ("Unit Testing", "Pytest automated test harness"),
-            ("Coverage", "107 assertions across all modules"),
-            ("GitHub Actions", "Automated regression pipeline"),
-            ("Reproducibility", "Deterministic random seeds throughout")
-        ], Inches(6.6), Inches(1.5), Inches(2.8))
+    add_clean_slide_header(s12, "Full-Stack Implementation, CI/CD & Selenium QA", 12)
+
+    cards_12 = [
+        ("Backend & REST APIs", [
+            ("Framework: ", "Modular Flask WSGI microservice"),
+            ("JSON Endpoints: ", "Career GPS, SHAP, ROI APIs"),
+            ("Latency: ", "< 45ms average response time"),
+            ("Data Store: ", "Vectorized in-memory data store")
+        ], Inches(0.6), Inches(1.15), Inches(2.7), Inches(4.0), NAVY),
+
+        ("Selenium Automated QA", [
+            ("Engine: ", "Selenium WebDriver (Python)"),
+            ("Coverage: ", "22 automated browser E2E tests"),
+            ("Validation: ", "Form inputs, DOM & Chart renders"),
+            ("Pass Rate: ", "100% Pass across all UI workflows")
+        ], Inches(3.65), Inches(1.15), Inches(2.7), Inches(4.0), CRIMSON),
+
+        ("CI/CD & Quality Control", [
+            ("Unit Testing: ", "Pytest modular test harness"),
+            ("Test Coverage: ", "107 assertions across all modules"),
+            ("GitHub Actions: ", "Automated PR regression pipeline"),
+            ("Reproducibility: ", "Deterministic random seeds")
+        ], Inches(6.7), Inches(1.15), Inches(2.7), Inches(4.0), GREEN)
     ]
-    for c_title, items, left, top, width in tool_cards:
-        tb = s12.shapes.add_textbox(left, top, width, Inches(3.4))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        p_hd = tf.paragraphs[0]
-        p_hd.text = c_title
-        format_text_run(p_hd.runs[0], "Arial", 14, bold=True, color=CRIMSON)
-        for label, val in items:
-            p_item = tf.add_paragraph()
-            p_item.text = f"• {label}: "
-            format_text_run(p_item.runs[0], "Arial", 11.5, bold=True, color=NAVY)
-            r_val = p_item.add_run()
-            r_val.text = val
-            format_text_run(r_val, "Arial", 11, color=SLATE)
+    for c_title, items, left, top, width, height, color in cards_12:
+        add_card(s12, left, top, width, height, c_title, items, color)
 
     # =========================================================================
-    # SLIDE 13: RESULTS ANALYSIS & VALIDATION BENCHMARKS
+    # SLIDE 13: RESULTS ANALYSIS & BENCHMARKS
     # =========================================================================
     s13 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s13, 13)
-    add_slide_title(s13, "Results Analysis & Quantitative Benchmarks")
-    
-    # Summary Table of Results
-    tbl_shape13 = s13.shapes.add_table(6, 4, Inches(0.6), Inches(1.5), Inches(8.8), Inches(3.3))
-    tbl13 = tbl_shape13.table
+    add_clean_slide_header(s13, "Results Analysis & Validation Benchmarks", 13)
+
+    table_shape13 = s13.shapes.add_table(6, 4, Inches(0.6), Inches(1.2), Inches(8.8), Inches(3.8))
+    tbl13 = table_shape13.table
+    tbl13.columns[0].width = Inches(2.0)
+    tbl13.columns[1].width = Inches(1.9)
+    tbl13.columns[2].width = Inches(2.1)
+    tbl13.columns[3].width = Inches(2.8)
+
     headers13 = ["Dimension / Module", "Empirical Metric", "Baseline Benchmark", "Industrial Validation Outcome"]
     for j, h in enumerate(headers13):
-        tbl13.cell(0, j).text = h
+        cell = tbl13.cell(0, j)
+        cell.text = h
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = NAVY
+        for p in cell.text_frame.paragraphs:
+            p.alignment = PP_ALIGN.CENTER
+            for r in p.runs:
+                format_run(r, "Arial", 10, bold=True, color=WHITE)
+
     rows13 = [
         ("Data Quality Engine", "13,965 records cleaned", "9.8% raw missingness", "0.0% residual nulls; 100% audited"),
         ("Junior Success (JDS)", "ROC-AUC: 0.812", "0.500 (Chance baseline)", "+31.2% predictive discrimination lift"),
@@ -556,61 +451,62 @@ def build_presentation():
     ]
     for i, r_vals in enumerate(rows13):
         for j, val in enumerate(r_vals):
-            tbl13.cell(i+1, j).text = val
+            cell = tbl13.cell(i+1, j)
+            cell.text = val
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = WHITE if i % 2 == 0 else CARD_BG
+            for p in cell.text_frame.paragraphs:
+                for r in p.runs:
+                    format_run(r, "Arial", 9.5, bold=(j == 0), color=NAVY)
 
     # =========================================================================
     # SLIDE 14: KEY LEARNINGS, FUTURE SCOPE & CONCLUSION
     # =========================================================================
     s14 = prs.slides.add_slide(blank_layout)
-    add_header_footer(s14, 14)
-    add_slide_title(s14, "Key Learnings, Future Scope & Conclusion")
-    
-    # Left: Industrial Learnings
-    tb14_1 = s14.shapes.add_textbox(Inches(0.6), Inches(1.4), Inches(4.3), Inches(3.4))
-    tf14_1 = tb14_1.text_frame
-    tf14_1.word_wrap = True
-    p = tf14_1.paragraphs[0]
-    p.text = "KEY INDUSTRIAL & ACADEMIC LEARNINGS"
-    format_text_run(p.runs[0], "Arial", 13.5, bold=True, color=NAVY)
-    
-    learnings = [
-        ("Full-Lifecycle ML Engineering: ", "Data cleaning pipelines, model training, cross-validation, and calibrated probability serving."),
-        ("Explainable AI in Practice: ", "Game-theoretic TreeSHAP implementation ensuring auditable HR recommendations."),
-        ("Network Graph Algorithms: ", "Bipartite projections, Jaccard distance modeling, and Dijkstra shortest paths."),
-        ("Automated E2E QA: ", "Selenium WebDriver browser automation integrated into continuous deployment pipelines.")
-    ]
-    for pre, bdy in learnings:
-        p = tf14_1.add_paragraph()
-        p.text = f"✔ {pre}"
-        format_text_run(p.runs[0], "Arial", 11.5, bold=True, color=GREEN)
-        r = p.add_run()
-        r.text = bdy
-        format_text_run(r, "Arial", 10.5, color=SLATE)
+    add_clean_slide_header(s14, "Key Learnings, Future Scope & Conclusion", 14)
 
-    # Right: Future Scope & Q&A
-    tb14_2 = s14.shapes.add_textbox(Inches(5.2), Inches(1.4), Inches(4.2), Inches(3.4))
-    tf14_2 = tb14_2.text_frame
-    tf14_2.word_wrap = True
-    p = tf14_2.paragraphs[0]
-    p.text = "FUTURE WORK & ACKNOWLEDGEMENT"
-    format_text_run(p.runs[0], "Arial", 13.5, bold=True, color=CRIMSON)
-    
+    items_14_left = [
+        ("Full-Lifecycle ML: ", "Data cleaning pipelines, model training, cross-validation, and calibrated probability serving."),
+        ("Explainable AI: ", "Game-theoretic TreeSHAP implementation ensuring auditable HR recommendations."),
+        ("Network Graph Algorithms: ", "Bipartite projections, Jaccard distance modeling, and Dijkstra shortest paths."),
+        ("Automated E2E Testing: ", "Selenium WebDriver browser automation integrated into continuous deployment pipelines.")
+    ]
+    add_card(s14, Inches(0.6), Inches(1.15), Inches(4.2), Inches(4.0), "KEY INDUSTRIAL & ACADEMIC LEARNINGS", items_14_left, GREEN)
+
+    # Right Card: Future Scope & Q&A
+    bg14_r = s14.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(5.2), Inches(1.15), Inches(4.2), Inches(4.0))
+    bg14_r.fill.solid()
+    bg14_r.fill.fore_color.rgb = CARD_BG
+    bg14_r.line.color.rgb = CARD_BORDER
+
+    tb14_r = s14.shapes.add_textbox(Inches(5.32), Inches(1.25), Inches(3.96), Inches(3.8))
+    tf14_r = tb14_r.text_frame
+    tf14_r.word_wrap = True
+    tf14_r.margin_left = tf14_r.margin_top = tf14_r.margin_right = tf14_r.margin_bottom = 0
+
+    p_hd14 = tf14_r.paragraphs[0]
+    p_hd14.text = "FUTURE WORK & ACKNOWLEDGEMENT"
+    format_run(p_hd14.runs[0], "Arial", 12.5, bold=True, color=CRIMSON)
+
     fut = [
         ("LLM Workforce Copilot: ", "Integrating conversational agents for natural language workforce querying."),
-        ("Live Labor Market Scraping: ", "Automated streaming scrapers for real-time skill demand updating."),
+        ("Live Market Scraping: ", "Automated streaming scrapers for real-time skill demand updating."),
         ("Enterprise Multi-Tenancy: ", "Dockerized microservices deployed via Kubernetes orchestration.")
     ]
     for pre, bdy in fut:
-        p = tf14_2.add_paragraph()
+        p = tf14_r.add_paragraph()
+        p.space_before = Pt(4)
         p.text = f"• {pre}"
-        format_text_run(p.runs[0], "Arial", 11.5, bold=True, color=NAVY)
+        format_run(p.runs[0], "Arial", 10.5, bold=True, color=NAVY)
         r = p.add_run()
         r.text = bdy
-        format_text_run(r, "Arial", 10.5, color=SLATE)
+        format_run(r, "Arial", 10, color=SLATE)
 
-    p_qa = tf14_2.add_paragraph()
-    p_qa.text = "\nTHANK YOU!\nOPEN FOR QUESTIONS & DISCUSSION (Q&A)"
-    format_text_run(p_qa.runs[0], "Arial", 13, bold=True, color=CRIMSON)
+    p_qa = tf14_r.add_paragraph()
+    p_qa.space_before = Pt(16)
+    p_qa.alignment = PP_ALIGN.CENTER
+    p_qa.text = "THANK YOU!\nOPEN FOR QUESTIONS & DISCUSSION (Q&A)"
+    format_run(p_qa.runs[0], "Arial", 12, bold=True, color=CRIMSON)
 
     prs.save(PPTX_PATH)
     print(f"Generated Industrial Training Presentation PPTX: {PPTX_PATH} ({len(prs.slides)} slides)")
