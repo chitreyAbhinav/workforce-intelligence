@@ -120,13 +120,11 @@ def build_presentation():
     # SLIDE 1: TITLE SLIDE (Official CU Takshashila Branding)
     # =========================================================================
     s1 = prs.slides.add_slide(blank_layout)
-    bg_img1 = os.path.join(EXTRACTED_DIR, "slide_1_img_0.png")
+    bg_img1 = os.path.join(EXTRACTED_DIR, "slide_1_bg_final.png")
+    if not os.path.exists(bg_img1):
+        bg_img1 = os.path.join(EXTRACTED_DIR, "slide_1_img_0.png")
     if os.path.exists(bg_img1):
         s1.shapes.add_picture(bg_img1, 0, 0, width=Inches(10.0), height=Inches(5.625))
-
-    cu_logo = os.path.join(EXTRACTED_DIR, "slide_1_img_1.png")
-    if os.path.exists(cu_logo):
-        s1.shapes.add_picture(cu_logo, Inches(0.6), Inches(0.35), width=Inches(1.7))
 
     # Main Title Box
     tb_t1 = s1.shapes.add_textbox(Inches(0.6), Inches(1.15), Inches(8.8), Inches(1.3))
