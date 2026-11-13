@@ -152,7 +152,7 @@ def build_presentation():
     format_run(p.runs[0], "Arial", 19, bold=True, color=NAVY)
 
     p = tf_c.add_paragraph()
-    p.text = "UID: 24BCS12754  |  Section: 802-B\nBachelor of Engineering in CSE\nGroup: CSE-TAKSHASHILA\nChandigarh University, Mohali, Punjab"
+    p.text = "UID: 24BCS12754  |  Section: 802-B\nBachelor of Engineering in CSE\nGroup: CSE-TAKSHASHILA (802-B)\nChandigarh University, Mohali, Punjab"
     format_run(p.runs[0], "Arial", 11.5, color=SLATE)
 
     # Industry Card (Right) - Mode: Remote, NO Viva Date

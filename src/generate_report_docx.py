@@ -29,11 +29,12 @@ ASSETS_DIR = os.path.join(OUTPUT_DIR, "assets")
 DOCX_PATH = os.path.join(OUTPUT_DIR, "Industrial_Training_Report.docx")
 EXTRACTED_DIR = r"C:\Users\chitr_mzkaj0t\.gemini\antigravity\scratch\workforce_intelligence\extracted_template_assets"
 
-# Colors
-NAVY = RGBColor(13, 35, 58)
-BLUE_HEADING = RGBColor(27, 79, 114)
-SLATE_SUB = RGBColor(44, 62, 80)
-CHARCOAL = RGBColor(30, 40, 50)
+# Colors: Strictly Pure Black for all Headings, Subheadings & Text
+BLACK = RGBColor(0, 0, 0)
+NAVY = BLACK
+BLUE_HEADING = BLACK
+SLATE_SUB = BLACK
+CHARCOAL = BLACK
 
 def enforce_a4_page_setup(section):
     """Enforce exact A4 dimensions (210mm x 297mm) and 1.0 inch margins at both API and XML levels."""
@@ -54,7 +55,7 @@ def enforce_a4_page_setup(section):
         pgSz.set(qn('w:h'), '16838')   # 11.692 inches in dxa
         pgSz.set(qn('w:code'), '9')    # 9 = ISO A4 in Microsoft Word
 
-def set_cell_margins(cell, top=100, bottom=100, left=150, right=150):
+def set_cell_margins(cell, top=60, bottom=60, left=100, right=100):
     """Set inner margins for a table cell."""
     tcPr = cell._tc.get_or_add_tcPr()
     tcMar = OxmlElement('w:tcMar')
@@ -70,7 +71,7 @@ def set_cell_shading(cell, color_hex):
     shading_elm = parse_xml(f'<w:shd {nsdecls("w")} w:fill="{color_hex}"/>')
     cell._tc.get_or_add_tcPr().append(shading_elm)
 
-def format_paragraph(p, space_before=0, space_after=6, line_spacing=1.5, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
+def format_paragraph(p, space_before=0, space_after=4, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     """Set intra-paragraph line spacing and inter-paragraph before/after spacing."""
     p.paragraph_format.space_before = Pt(space_before)
     p.paragraph_format.space_after = Pt(space_after)
@@ -78,43 +79,46 @@ def format_paragraph(p, space_before=0, space_after=6, line_spacing=1.5, align=W
     p.alignment = align
 
 def add_styled_heading(doc, text, level):
-    """Add standardized headings with clean inter/intra paragraph spacing."""
+    """Add standardized headings with clean inter/intra paragraph spacing, strictly in black."""
     p = doc.add_paragraph()
+    p.paragraph_format.keep_with_next = True
     if level == 1:
         # Chapter Heading: Size 16, Bold, Centered
-        format_paragraph(p, space_before=24, space_after=12, line_spacing=1.2, align=WD_ALIGN_PARAGRAPH.CENTER)
+        format_paragraph(p, space_before=18, space_after=8, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.CENTER)
+        p.paragraph_format.keep_with_next = True
         run = p.add_run(text)
         run.font.name = 'Times New Roman'
         run.font.size = Pt(16)
         run.bold = True
-        run.font.color.rgb = NAVY
+        run.font.color.rgb = BLACK
     elif level == 2:
         # Main Heading: Size 14, Bold, Left Aligned
-        format_paragraph(p, space_before=16, space_after=6, line_spacing=1.2, align=WD_ALIGN_PARAGRAPH.LEFT)
+        format_paragraph(p, space_before=14, space_after=5, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.LEFT)
+        p.paragraph_format.keep_with_next = True
         run = p.add_run(text)
         run.font.name = 'Times New Roman'
         run.font.size = Pt(14)
         run.bold = True
-        run.font.color.rgb = BLUE_HEADING
+        run.font.color.rgb = BLACK
     elif level == 3:
         # Subheading: Size 12, Bold, Left Aligned
-        format_paragraph(p, space_before=12, space_after=4, line_spacing=1.2, align=WD_ALIGN_PARAGRAPH.LEFT)
+        format_paragraph(p, space_before=10, space_after=3, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.LEFT)
+        p.paragraph_format.keep_with_next = True
         run = p.add_run(text)
         run.font.name = 'Times New Roman'
         run.font.size = Pt(12)
         run.bold = True
-        run.font.color.rgb = SLATE_SUB
+        run.font.color.rgb = BLACK
     return p
 
-def add_body_p(doc, text, bold_prefix=None):
+def add_body_p(doc, text, bold_prefix=None, keep_with_next=False):
     """
     Add regular body paragraph with:
-    - Intra-paragraph spacing: exactly 1.5 line spacing
-    - Inter-paragraph spacing: 0 pt before, 6 pt after
+    - Intra-paragraph spacing: compact 1.25 line spacing (eliminates excess gap between lines of same paragraph)
+    - Inter-paragraph spacing: 0 pt before, 4 pt after
     - Alignment: Justified
     Handles clean paragraph splitting if multiple lines exist.
     """
-    # If text has multiple paragraphs separated by newlines, add each as a distinct paragraph
     sub_lines = [l.strip() for l in text.split('\n') if l.strip()]
     if not sub_lines:
         return None
@@ -122,58 +126,73 @@ def add_body_p(doc, text, bold_prefix=None):
     last_p = None
     for i, line in enumerate(sub_lines):
         p = doc.add_paragraph()
+        if keep_with_next:
+            p.paragraph_format.keep_with_next = True
         # Check if line looks like a bullet or list item
         is_bullet = line.startswith('•') or line.startswith('-') or (len(line) > 2 and line[0].isdigit() and line[1] in ['.', ')'])
         if is_bullet:
-            format_paragraph(p, space_before=2, space_after=4, line_spacing=1.5, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
+            format_paragraph(p, space_before=1, space_after=3, line_spacing=1.2, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
             p.paragraph_format.left_indent = Inches(0.25)
         else:
-            format_paragraph(p, space_before=0, space_after=6, line_spacing=1.5, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
+            format_paragraph(p, space_before=0, space_after=4, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
 
         if i == 0 and bold_prefix:
             r_pre = p.add_run(bold_prefix)
             r_pre.font.name = 'Times New Roman'
             r_pre.font.size = Pt(12)
             r_pre.bold = True
+            r_pre.font.color.rgb = BLACK
 
         run = p.add_run(line)
         run.font.name = 'Times New Roman'
         run.font.size = Pt(12)
+        run.font.color.rgb = BLACK
         last_p = p
 
     return last_p
 
 def add_figure_with_caption(doc, img_path, caption_text, width_inches=5.8):
-    """Add figure centered with clean caption spacing."""
+    """Add figure centered with keep_with_next so caption is never separated from image."""
     if os.path.exists(img_path):
         p_img = doc.add_paragraph()
         p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        format_paragraph(p_img, space_before=10, space_after=4, line_spacing=1.0, align=WD_ALIGN_PARAGRAPH.CENTER)
+        format_paragraph(p_img, space_before=8, space_after=2, line_spacing=1.0, align=WD_ALIGN_PARAGRAPH.CENTER)
+        p_img.paragraph_format.keep_with_next = True  # Image ALWAYS stays with caption!
         run_img = p_img.add_run()
         run_img.add_picture(img_path, width=Inches(width_inches))
 
         p_cap = doc.add_paragraph()
-        format_paragraph(p_cap, space_before=2, space_after=12, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.CENTER)
+        format_paragraph(p_cap, space_before=2, space_after=8, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.CENTER)
         run_cap = p_cap.add_run(caption_text)
         run_cap.font.name = 'Times New Roman'
         run_cap.font.size = Pt(10)
         run_cap.bold = True
+        run_cap.font.color.rgb = BLACK
     else:
         print(f"Warning: Image not found: {img_path}")
 
-def format_table(table, header_bg="1B4F72", alt_bg="F4F6F7"):
-    """Format table with centered alignment, clean padding, and cantSplit row rules."""
+def format_table(table, header_bg="2C2C2C", alt_bg="F7F7F7"):
+    """
+    Format table with centered alignment, clean padding, and cantSplit + keep_with_next rules.
+    Prevents ANY table from splitting across multiple pages!
+    """
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    num_rows = len(table.rows)
     for i, row in enumerate(table.rows):
         trPr = row._tr.get_or_add_trPr()
         trPr.append(parse_xml(f'<w:cantSplit {nsdecls("w")}/>'))
+        
+        # Setting keep_with_next on all rows except the final row binds all rows together
+        is_not_last_row = (i < num_rows - 1)
         for cell in row.cells:
-            set_cell_margins(cell, top=80, bottom=80, left=120, right=120)
+            set_cell_margins(cell, top=60, bottom=60, left=100, right=100)
             if i == 0:
                 set_cell_shading(cell, header_bg)
                 for p in cell.paragraphs:
                     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                    format_paragraph(p, space_before=3, space_after=3, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.CENTER)
+                    format_paragraph(p, space_before=2, space_after=2, line_spacing=1.1, align=WD_ALIGN_PARAGRAPH.CENTER)
+                    if is_not_last_row:
+                        p.paragraph_format.keep_with_next = True
                     for r in p.runs:
                         r.font.name = 'Times New Roman'
                         r.font.size = Pt(9.5)
@@ -185,10 +204,13 @@ def format_table(table, header_bg="1B4F72", alt_bg="F4F6F7"):
                 else:
                     set_cell_shading(cell, alt_bg)
                 for p in cell.paragraphs:
-                    format_paragraph(p, space_before=2, space_after=2, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.LEFT)
+                    format_paragraph(p, space_before=1.5, space_after=1.5, line_spacing=1.1, align=WD_ALIGN_PARAGRAPH.LEFT)
+                    if is_not_last_row:
+                        p.paragraph_format.keep_with_next = True
                     for r in p.runs:
                         r.font.name = 'Times New Roman'
                         r.font.size = Pt(9)
+                        r.font.color.rgb = BLACK
 
 def build_full_report():
     doc = Document()
@@ -199,63 +221,69 @@ def build_full_report():
 
     print("Building Title Page...")
     # =========================================================================
-    # 1. TITLE PAGE (Appendix 1 Format)
+    # 1. TITLE PAGE (Appendix 1 Format) - Fully utilizes Page 1 without extra text
     # =========================================================================
     p_title = doc.add_paragraph()
-    format_paragraph(p_title, space_before=12, space_after=12, line_spacing=1.3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    format_paragraph(p_title, space_before=16, space_after=28, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.CENTER)
     r = p_title.add_run("WORKFORCEX: STRATEGIC WORKFORCE INTELLIGENCE, PREDICTIVE CAREER GPS AND EXPLAINABLE TALENT ANALYTICS PLATFORM")
     r.font.name = 'Times New Roman'
     r.font.size = Pt(16)
     r.bold = True
-    r.font.color.rgb = NAVY
+    r.font.color.rgb = BLACK
 
     p_sub = doc.add_paragraph()
-    format_paragraph(p_sub, space_before=8, space_after=14, line_spacing=1.3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    format_paragraph(p_sub, space_before=10, space_after=30, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.CENTER)
     r = p_sub.add_run("A PROJECT REPORT")
     r.font.name = 'Times New Roman'
     r.font.size = Pt(14)
     r.bold = True
+    r.font.color.rgb = BLACK
 
     p_by = doc.add_paragraph()
-    format_paragraph(p_by, space_before=8, space_after=4, line_spacing=1.3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    format_paragraph(p_by, space_before=10, space_after=30, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.CENTER)
     r = p_by.add_run("Submitted by\n")
     r.font.name = 'Times New Roman'
     r.font.size = Pt(13)
     r.italic = True
     r.bold = True
+    r.font.color.rgb = BLACK
 
     r_name = p_by.add_run("ABHINAV CHITREY\n")
     r_name.font.name = 'Times New Roman'
     r_name.font.size = Pt(16)
     r_name.bold = True
+    r_name.font.color.rgb = BLACK
 
     r_uid = p_by.add_run("(UID: 24BCS12754)")
     r_uid.font.name = 'Times New Roman'
     r_uid.font.size = Pt(14)
     r_uid.bold = True
+    r_uid.font.color.rgb = BLACK
 
     p_req = doc.add_paragraph()
-    format_paragraph(p_req, space_before=10, space_after=10, line_spacing=1.3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    format_paragraph(p_req, space_before=12, space_after=30, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.CENTER)
     r = p_req.add_run("in partial fulfillment for the award of the degree of\n")
     r.font.name = 'Times New Roman'
     r.font.size = Pt(13)
     r.italic = True
     r.bold = True
+    r.font.color.rgb = BLACK
 
     r_deg = p_req.add_run("BACHELOR OF ENGINEERING\nIN\nCOMPUTER SCIENCE & ENGINEERING")
     r_deg.font.name = 'Times New Roman'
     r_deg.font.size = Pt(15)
     r_deg.bold = True
+    r_deg.font.color.rgb = BLACK
 
     # University Logo
     cu_logo_path = os.path.join(EXTRACTED_DIR, "docx_img_1.jpeg")
     if os.path.exists(cu_logo_path):
         p_logo = doc.add_paragraph()
-        format_paragraph(p_logo, space_before=10, space_after=10, line_spacing=1.0, align=WD_ALIGN_PARAGRAPH.CENTER)
-        p_logo.add_run().add_picture(cu_logo_path, width=Inches(2.5))
+        format_paragraph(p_logo, space_before=14, space_after=26, line_spacing=1.0, align=WD_ALIGN_PARAGRAPH.CENTER)
+        p_logo.add_run().add_picture(cu_logo_path, width=Inches(2.7))
 
     p_inst = doc.add_paragraph()
-    format_paragraph(p_inst, space_before=6, space_after=0, line_spacing=1.3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    format_paragraph(p_inst, space_before=12, space_after=0, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.CENTER)
     r_inst = p_inst.add_run(
         "INDUSTRY PARTNER: COGNISTRAT TECHNOLOGIES PVT. LTD.\n"
         "INTERNSHIP MODE: REMOTE / VIRTUAL (ENTERPRISE AI R&D LAB)\n\n"
@@ -266,6 +294,7 @@ def build_full_report():
     r_inst.font.name = 'Times New Roman'
     r_inst.font.size = Pt(12)
     r_inst.bold = True
+    r_inst.font.color.rgb = BLACK
 
     doc.add_page_break()
 
@@ -274,14 +303,15 @@ def build_full_report():
     # =========================================================================
     print("Building Bonafide Certificate...")
     p_bc_head = doc.add_paragraph()
-    format_paragraph(p_bc_head, space_before=18, space_after=18, line_spacing=1.3, align=WD_ALIGN_PARAGRAPH.CENTER)
+    format_paragraph(p_bc_head, space_before=18, space_after=14, line_spacing=1.25, align=WD_ALIGN_PARAGRAPH.CENTER)
     r = p_bc_head.add_run("BONAFIDE CERTIFICATE")
     r.font.name = 'Times New Roman'
     r.font.size = Pt(16)
     r.bold = True
+    r.font.color.rgb = BLACK
 
     p_bc_body = doc.add_paragraph()
-    format_paragraph(p_bc_body, space_before=14, space_after=24, line_spacing=2.0, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
+    format_paragraph(p_bc_body, space_before=12, space_after=16, line_spacing=1.35, align=WD_ALIGN_PARAGRAPH.JUSTIFY)
     r = p_bc_body.add_run(
         'Certified that this project report titled "WORKFORCEX: STRATEGIC WORKFORCE INTELLIGENCE, '
         'PREDICTIVE CAREER GPS AND EXPLAINABLE TALENT ANALYTICS PLATFORM" is the bonafide work of '
@@ -292,6 +322,7 @@ def build_full_report():
     )
     r.font.name = 'Times New Roman'
     r.font.size = Pt(13)
+    r.font.color.rgb = BLACK
 
     # Signatures Table
     sig_table = doc.add_table(rows=5, cols=2)
@@ -429,52 +460,52 @@ def build_full_report():
     r.bold = True
 
     toc_items = [
-        ("List of Figures", "i"),
-        ("List of Tables", "ii"),
-        ("List of Abbreviations & Symbols", "iii"),
-        ("Abstract", "iv"),
-        ("Graphical Abstract", "v"),
-        ("CHAPTER 1: INTRODUCTION", "1"),
-        ("  1.1 Client & Need Identification (Contemporary Industry Context)", "1"),
-        ("  1.2 Problem Identification & Strategic Significance", "3"),
-        ("  1.3 Identification of Core Engineering Tasks", "4"),
-        ("  1.4 Six-Week Training Timeline & Milestone Execution", "5"),
-        ("  1.5 Organization of the Report", "6"),
-        ("CHAPTER 2: INDUSTRIAL BACKGROUND & TECHNOLOGY STACK", "7"),
-        ("  2.1 Corporate Profile: CogniStrat Technologies Pvt. Ltd.", "7"),
-        ("  2.2 Industrial Workflow, Remote Collaborative Standards & Agile Culture", "8"),
-        ("  2.3 Modern Toolchain & Technology Stack", "9"),
-        ("CHAPTER 3: SYSTEM DESIGN & MATHEMATICAL METHODOLOGY", "11"),
-        ("  3.1 End-to-End System Architecture", "11"),
-        ("  3.2 Multi-Dataset Ingestion & Quality Engine Pipeline", "12"),
-        ("  3.3 Junior Data Scientist (JDS) Success Prediction Model", "14"),
-        ("  3.4 Senior Role Personality Success Classifier (SDS)", "15"),
-        ("  3.5 Explainable AI (TreeSHAP) Mathematical Formulation", "17"),
-        ("  3.6 Graph-Theoretic Role–Skill Adjacency Network & Career GPS", "18"),
+        ("List of Figures", "vii"),
+        ("List of Tables", "vii"),
+        ("List of Abbreviations & Symbols", "viii"),
+        ("Abstract", "ix"),
+        ("Graphical Abstract", "x"),
+        ("CHAPTER 1: INTRODUCTION", "11"),
+        ("  1.1 Client & Need Identification (Contemporary Industry Context)", "11"),
+        ("  1.2 Problem Identification & Strategic Significance", "11"),
+        ("  1.3 Identification of Core Engineering Tasks", "12"),
+        ("  1.4 Six-Week Training Timeline & Milestone Execution", "13"),
+        ("  1.5 Organization of the Report", "14"),
+        ("CHAPTER 2: INDUSTRIAL BACKGROUND & TECHNOLOGY STACK", "15"),
+        ("  2.1 Corporate Profile: CogniStrat Technologies Pvt. Ltd.", "15"),
+        ("  2.2 Industrial Workflow, Remote Collaborative Standards & Agile Culture", "15"),
+        ("  2.3 Modern Toolchain & Technology Stack", "15"),
+        ("CHAPTER 3: SYSTEM DESIGN & MATHEMATICAL METHODOLOGY", "17"),
+        ("  3.1 End-to-End System Architecture", "17"),
+        ("  3.2 Multi-Dataset Ingestion & Quality Engine Pipeline", "18"),
+        ("  3.3 Junior Data Scientist (JDS) Success Prediction Model", "18"),
+        ("  3.4 Senior Role Personality Success Classifier (SDS)", "18"),
+        ("  3.5 Explainable AI (TreeSHAP) Mathematical Formulation", "19"),
+        ("  3.6 Graph-Theoretic Role–Skill Adjacency Network & Career GPS", "19"),
         ("  3.7 Market × Success 2×2 Decision Matrix Formulation", "20"),
-        ("CHAPTER 4: IMPLEMENTATION DETAILS & MODERN ENGINEERING TOOLS", "21"),
-        ("  4.1 Modular Software Architecture & Directory Layout", "21"),
-        ("  4.2 Production Data Harmonization & Feature Engineering Engine", "22"),
+        ("CHAPTER 4: IMPLEMENTATION DETAILS & MODERN ENGINEERING TOOLS", "22"),
+        ("  4.1 Modular Software Architecture & Directory Layout", "22"),
+        ("  4.2 Production Data Harmonization & Feature Engineering Engine", "23"),
         ("  4.3 Flask Microservices Architecture & REST API Endpoints", "23"),
-        ("  4.4 Interactive Frontend Presentation & Dynamic Visualizations", "25"),
-        ("  4.5 End-to-End UI Automation Using Selenium WebDriver", "26"),
-        ("  4.6 Continuous Integration & Automated Pytest Test Harness", "27"),
-        ("CHAPTER 5: RESULTS ANALYSIS, CHARACTERIZATION & VALIDATION", "28"),
-        ("  5.1 Data Cleaning & Ingestion Quality Audit", "28"),
-        ("  5.2 Machine Learning Model Validation & Quantitative Benchmarks", "29"),
-        ("  5.3 Explainable AI (SHAP) Insights & Feature Attribution Ranking", "31"),
-        ("  5.4 Strategic Market × Success Matrix Discoveries", "32"),
-        ("  5.5 Workforce Simulator ROI & Economic Decision Validation", "33"),
-        ("  5.6 Automated CI/CD & Selenium Test Suite Verification", "34"),
-        ("CHAPTER 6: CONCLUSION AND FUTURE WORK", "35"),
-        ("  6.1 Summary of Project Outcomes & Industrial Learnings", "35"),
-        ("  6.2 Technical Deviation Analysis & Design Trade-offs", "36"),
-        ("  6.3 Future Roadmap & Architectural Extensions", "37"),
-        ("REFERENCES", "38"),
-        ("APPENDIX: USER MANUAL", "40"),
-        ("  A.1 Environment Setup & Installation Guide", "40"),
-        ("  A.2 Running the WorkforceX Server & Accessing Visualizations", "41"),
-        ("  A.3 Executing Pytest & Selenium Automated Test Suites", "42")
+        ("  4.4 Interactive Frontend Presentation & Dynamic Visualizations", "24"),
+        ("  4.5 End-to-End UI Automation Using Selenium WebDriver", "24"),
+        ("  4.6 Continuous Integration & Automated Pytest Test Harness", "24"),
+        ("CHAPTER 5: RESULTS ANALYSIS, CHARACTERIZATION & VALIDATION", "26"),
+        ("  5.1 Data Cleaning & Ingestion Quality Audit", "26"),
+        ("  5.2 Machine Learning Model Validation & Quantitative Benchmarks", "26"),
+        ("  5.3 Explainable AI (SHAP) Insights & Feature Attribution Ranking", "27"),
+        ("  5.4 Strategic Market × Success Matrix Discoveries", "28"),
+        ("  5.5 Workforce Simulator ROI & Economic Decision Validation", "29"),
+        ("  5.6 Automated CI/CD & Selenium Test Suite Verification", "30"),
+        ("CHAPTER 6: CONCLUSION AND FUTURE WORK", "31"),
+        ("  6.1 Summary of Project Outcomes & Industrial Learnings", "31"),
+        ("  6.2 Technical Deviation Analysis & Design Trade-offs", "31"),
+        ("  6.3 Future Roadmap & Architectural Extensions", "31"),
+        ("REFERENCES", "33"),
+        ("APPENDIX: USER MANUAL", "34"),
+        ("  A.1 Environment Setup & Installation Guide", "34"),
+        ("  A.2 Running the WorkforceX Server & Accessing Visualizations", "34"),
+        ("  A.3 Executing Pytest & Selenium Automated Test Suites", "34")
     ]
 
     toc_table = doc.add_table(rows=len(toc_items), cols=2)
@@ -514,14 +545,14 @@ def build_full_report():
     r.bold = True
 
     figs = [
-        ("Figure 1.1: Six-Week Industrial Training Milestone Execution Gantt Chart", "5"),
-        ("Figure 3.1: WorkforceX Enterprise System Architecture & End-to-End Pipeline", "11"),
-        ("Figure 3.2: Topological Role-Skill Adjacency Network & Optimal Career GPS Route", "19"),
+        ("Figure 1.1: Six-Week Industrial Training Milestone Execution Gantt Chart", "13"),
+        ("Figure 3.1: WorkforceX Enterprise System Architecture & End-to-End Pipeline", "17"),
+        ("Figure 3.2: Topological Role-Skill Adjacency Network & Optimal Career GPS Route", "20"),
         ("Figure 4.1: Empirical Market Demand × Observed Success 2×2 Strategic Matrix", "24"),
-        ("Figure 5.1: Receiver Operating Characteristic (ROC) Validation Curves", "30"),
-        ("Figure 5.2: Explainable AI (TreeSHAP) Global Feature Attribution Ranking", "31"),
-        ("Figure 5.3: Workforce Simulator Decision Economics (Build vs Buy vs Automate)", "33"),
-        ("Figure A.1: WorkforceX Interactive Decision Twin Web Portal (App User Interface)", "41")
+        ("Figure 5.1: Receiver Operating Characteristic (ROC) Validation Curves", "26"),
+        ("Figure 5.2: Explainable AI (TreeSHAP) Global Feature Attribution Ranking", "27"),
+        ("Figure 5.3: Workforce Simulator Decision Economics (Build vs Buy vs Automate)", "29"),
+        ("Figure A.1: WorkforceX Interactive Decision Twin Web Portal (App User Interface)", "34")
     ]
     for title, pno in figs:
         p = doc.add_paragraph()
@@ -538,15 +569,14 @@ def build_full_report():
     r.bold = True
 
     tbls = [
-        ("Table 1.1: Industrial Internship Weekly Milestone Breakdown", "5"),
-        ("Table 3.1: Raw Multi-Source Dataset Ingestion Schema & Dimensions", "13"),
-        ("Table 3.2: Predictive Model Hyperparameters & Architecture Specification", "16"),
-        ("Table 4.1: Modular Software Architecture & Directory Layout", "21"),
-        ("Table 5.1: Data Quality & Preprocessing Cleaning Audit (13,965 Records)", "28"),
-        ("Table 5.2: Junior Data Scientist (JDS) Success Model Performance Metrics", "29"),
-        ("Table 5.3: Senior Data Scientist (SDS) Personality Classifier Performance", "30"),
-        ("Table 5.4: Build vs Buy Financial Optimization Benchmark", "33"),
-        ("Table 5.5: Selenium E2E Automated Test Suite Execution Summary", "34")
+        ("Table 1.1: Industrial Internship Weekly Milestone Breakdown", "13"),
+        ("Table 3.1: Raw Multi-Source Dataset Ingestion Schema & Dimensions", "18"),
+        ("Table 3.2: Predictive Model Hyperparameters & Architecture Specification", "19"),
+        ("Table 4.1: Modular Software Architecture & Directory Layout", "22"),
+        ("Table 5.1: Data Quality & Preprocessing Cleaning Audit (13,965 Records)", "26"),
+        ("Table 5.2: Junior Data Scientist (JDS) Success Model Performance Metrics", "27"),
+        ("Table 5.4: Build vs Buy Financial Optimization Benchmark", "29"),
+        ("Table 5.5: Selenium E2E Automated Test Suite Execution Summary", "30")
     ]
     for title, pno in tbls:
         p = doc.add_paragraph()
@@ -733,7 +763,8 @@ def build_full_report():
     add_styled_heading(doc, "1.4 Six-Week Training Timeline & Milestone Execution", level=2)
     add_body_p(doc,
         "The industrial internship spanned a six-week duration, commencing on 5th May 2026 and culminating on 15th June 2026. "
-        "Table 1.1 delineates the week-by-week milestone breakdown, and Figure 1.1 provides the corresponding Gantt chart."
+        "Table 1.1 delineates the week-by-week milestone breakdown, and Figure 1.1 provides the corresponding Gantt chart.",
+        keep_with_next=True
     )
 
     t11_data = [
@@ -834,7 +865,8 @@ def build_full_report():
     add_body_p(doc,
         "WorkforceX ingests four disparate, real-world data sources representing different dimensions of the corporate talent ecosystem. "
         "Prior to model training, raw inputs undergo automated validation, type harmonization, and missing value treatment. Table 3.1 "
-        "summarizes the raw dataset dimensions and analytical roles."
+        "summarizes the raw dataset dimensions and analytical roles.",
+        keep_with_next=True
     )
 
     t31_data = [
@@ -882,7 +914,16 @@ def build_full_report():
         "The decision boundary is optimized via multi-class calibrated probability estimation:"
     )
     add_body_p(doc, "P(Y_senior = k | z) = exp(w_k^T z) / sum_{j=1}^K exp(w_j^T z)", bold_prefix="Softmax Formulation: ")
-    add_body_p(doc, "where z = [O, C, E, A, N, Technical_Experience] represents the standardized feature vector for senior candidates.")
+    add_body_p(doc, "where z = [O, C, E, A, N, Technical_Experience] represents the standardized feature vector for senior candidates.", keep_with_next=True)
+
+    p_t32_cap = doc.add_paragraph()
+    format_paragraph(p_t32_cap, space_before=6, space_after=4, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.CENTER)
+    p_t32_cap.paragraph_format.keep_with_next = True
+    r = p_t32_cap.add_run("Table 3.2: Predictive Model Hyperparameters & Architecture Specification")
+    r.font.name = 'Times New Roman'
+    r.font.size = Pt(10)
+    r.bold = True
+    r.font.color.rgb = BLACK
 
     t32_data = [
         ("JDS Success Predictor", "Gradient Boosted Classifier + Logistic Reg", "max_depth=4, n_estimators=120, lr=0.08, L2_reg=0.01", "ROC-AUC: 0.812"),
@@ -959,7 +1000,8 @@ def build_full_report():
     add_body_p(doc,
         "WorkforceX is engineered as a clean, modular Python package following enterprise separation-of-concerns principles. "
         "The application separates data transformation pipelines, machine learning estimators, web routing, static visual assets, "
-        "and automated test harnesses into dedicated packages. Table 4.1 summarizes the directory structure."
+        "and automated test harnesses into dedicated packages. Table 4.1 summarizes the directory structure.",
+        keep_with_next=True
     )
 
     t41_data = [
@@ -1041,7 +1083,8 @@ def build_full_report():
     add_styled_heading(doc, "5.1 Data Cleaning & Ingestion Quality Audit", level=2)
     add_body_p(doc,
         "The automated data quality engine processed 13,965 total records across all four datasets. Table 5.1 details the before-and-after "
-        "cleaning audit metrics, confirming 100% data integrity and zero unresolved null values in the production training set."
+        "cleaning audit metrics, confirming 100% data integrity and zero unresolved null values in the production training set.",
+        keep_with_next=True
     )
 
     t51_data = [
@@ -1072,6 +1115,15 @@ def build_full_report():
     )
     add_figure_with_caption(doc, os.path.join(ASSETS_DIR, "Figure_5_1_Model_ROC_Curves.png"), 
                             "Figure 5.1: Receiver Operating Characteristic (ROC) Validation Curves", width_inches=5.8)
+
+    p_t52_cap = doc.add_paragraph()
+    format_paragraph(p_t52_cap, space_before=6, space_after=4, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.CENTER)
+    p_t52_cap.paragraph_format.keep_with_next = True
+    r = p_t52_cap.add_run("Table 5.2: Junior Data Scientist (JDS) Success Model Performance Metrics")
+    r.font.name = 'Times New Roman'
+    r.font.size = Pt(10)
+    r.bold = True
+    r.font.color.rgb = BLACK
 
     t52_data = [
         ("Accuracy", "79.8%", "72.0%", "+7.8% Lift"),
@@ -1115,7 +1167,8 @@ def build_full_report():
     add_body_p(doc,
         "To validate the decision simulation capabilities, a simulated case study was executed for transitioning 50 technical employees. "
         "As detailed in Table 5.4 and Figure 5.3, the internal 'Build' strategy cost $18,500 per role with a 6.2-week ramp-up, compared to "
-        "$118,000 and 18.4 weeks for external 'Buy' hiring, achieving an empirical 6.3x cost-efficiency advantage and saving over $4.97 Million."
+        "$118,000 and 18.4 weeks for external 'Buy' hiring, achieving an empirical 6.3x cost-efficiency advantage and saving over $4.97 Million.",
+        keep_with_next=True
     )
 
     t54_data = [
@@ -1145,7 +1198,8 @@ def build_full_report():
     add_styled_heading(doc, "5.6 Automated CI/CD & Selenium Test Suite Verification", level=2)
     add_body_p(doc,
         "The automated testing framework confirmed complete software stability across 100% of test suites. "
-        "Table 5.5 presents the automated test execution summary."
+        "Table 5.5 presents the automated test execution summary.",
+        keep_with_next=True
     )
 
     t55_data = [
