@@ -82,7 +82,7 @@ def create_corporate_stamp(size=360):
 def create_signature_image(name, title, color=(14, 38, 98)):
     """
     Generate an authentic, high-resolution cursive executive signature 
-    for corporate authorities using refined handwriting script fonts with natural tapering pen flourishes.
+    for corporate authorities using refined handwriting script fonts with clean, natural ink flow.
     """
     scale = 4
     if "Arvind" in name:
@@ -91,14 +91,12 @@ def create_signature_image(name, title, color=(14, 38, 98)):
         font_file = "VLADIMIR.TTF" if os.path.exists(r"C:\Windows\Fonts\VLADIMIR.TTF") else "segoescb.ttf"
         font_size = 42
         slant = 1.5
-        flourish_style = "taper"
     else:
         sig_text = "Meenakshi Sundaram"
         # French Script: graceful, flowing corporate authority cursive signature
         font_file = "FRSCRIPT.TTF" if os.path.exists(r"C:\Windows\Fonts\FRSCRIPT.TTF") else "segoesc.ttf"
-        font_size = 46
+        font_size = 44
         slant = 0.0
-        flourish_style = "swirl"
 
     font_path = os.path.join(r"C:\Windows\Fonts", font_file)
     try:
@@ -109,51 +107,18 @@ def create_signature_image(name, title, color=(14, 38, 98)):
     temp_img = Image.new("RGBA", (10, 10))
     d = ImageDraw.Draw(temp_img)
     bbox = d.textbbox((0, 0), sig_text, font=font)
-    tw = bbox[2] - bbox[0]
-    th = bbox[3] - bbox[1]
 
-    cw = tw + int(100 * scale)
-    ch = th + int(60 * scale)
+    cw = bbox[2] - bbox[0] + int(40 * scale)
+    ch = bbox[3] - bbox[1] + int(30 * scale)
     img = Image.new("RGBA", (cw, ch), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
 
-    ink_rgba = (color[0], color[1], color[2], 235)
+    ink_rgba = (color[0], color[1], color[2], 240)
 
-    tx = int(25 * scale)
-    ty = int(12 * scale)
-    draw.text((tx, ty), sig_text, font=font, fill=ink_rgba)
-
-    # Natural executive flourish: subtle, tapering pen line under the surname
-    if flourish_style == "taper":
-        start_x = tx + int(tw * 0.42)
-        end_x = tx + tw + int(14 * scale)
-        base_y = ty + th + int(2 * scale)
-        pts = []
-        steps = 60
-        for i in range(steps + 1):
-            t = i / steps
-            x = start_x + (end_x - start_x) * t
-            y = base_y - math.sin(t * math.pi) * (4 * scale) + (t * 2 * scale)
-            pts.append((x, y))
-        for i in range(len(pts) - 1):
-            t = i / steps
-            w = max(1, int((2.0 * (1.0 - t * 0.75)) * scale))
-            draw.line([pts[i], pts[i+1]], fill=ink_rgba, width=w)
-    elif flourish_style == "swirl":
-        start_x = tx + int(tw * 0.28)
-        end_x = tx + tw + int(10 * scale)
-        base_y = ty + th + int(2.5 * scale)
-        pts = []
-        steps = 60
-        for i in range(steps + 1):
-            t = i / steps
-            x = start_x + (end_x - start_x) * t
-            y = base_y - math.sin(t * math.pi * 0.85) * (3.5 * scale)
-            pts.append((x, y))
-        for i in range(len(pts) - 1):
-            t = i / steps
-            w = max(1, int((1.8 * (1.0 - t * 0.65)) * scale))
-            draw.line([pts[i], pts[i+1]], fill=ink_rgba, width=w)
+    # Offset drawing so full ascenders and descenders are smoothly captured
+    ox = int(20 * scale) - bbox[0]
+    oy = int(15 * scale) - bbox[1]
+    draw.text((ox, oy), sig_text, font=font, fill=ink_rgba)
 
     if slant != 0:
         img = img.rotate(slant, resample=Image.BICUBIC, expand=True)
@@ -169,7 +134,7 @@ def create_signature_image(name, title, color=(14, 38, 98)):
         ))
 
     # Resize smoothly with Lanczos filter for crisp ink edges
-    target_h = 36
+    target_h = 34
     target_w = int(img.width * (target_h / img.height))
     return img.resize((target_w, target_h), Image.LANCZOS)
 
@@ -322,12 +287,12 @@ def build_pdf_certificate():
     c.setFont("Helvetica-Bold", 9.5)
     c.drawCentredString(width / 2.0, eval_y, "PERFORMANCE ASSESSMENT: GRADE A+ (OUTSTANDING)  |  TECHNICAL EVALUATION: 96 / 100")
 
-    # 7. Verification QR Code (Bottom Left)
+    # 7. Verification QR Code (Bottom Left - Compact, Zero Overlap)
     qr_drawing = qr.QrCodeWidget('https://verify.cognistrat.tech/credentials/CS-2026-INT-12754')
-    qr_drawing.barWidth = 56
-    qr_drawing.barHeight = 56
+    qr_drawing.barWidth = 46
+    qr_drawing.barHeight = 46
     qr_drawing.qrVersion = 2
-    d = Drawing(56, 56)
+    d = Drawing(46, 46)
     d.add(qr_drawing)
     c.saveState()
     c.translate(55, 45)
@@ -336,32 +301,32 @@ def build_pdf_certificate():
     
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(navy)
-    c.drawString(120, 92, "AUTHENTIC SECURE CREDENTIAL")
+    c.drawString(108, 88, "SECURE CREDENTIAL")
     c.setFont("Helvetica", 6.5)
     c.setFillColor(slate)
-    c.drawString(120, 82, "Scan QR to verify institutional accreditation")
-    c.drawString(120, 72, "Credential ID: CST/BLR/2026/SUM-INT/12754")
-    c.drawString(120, 62, "Digital Registrar: verify.cognistrat.tech")
-    c.drawString(120, 52, "Issued by CogniStrat R&D Registrar")
+    c.drawString(108, 77, "ID: CST-2026-INT-12754")
+    c.drawString(108, 67, "verify.cognistrat.tech")
+    c.drawString(108, 57, "CogniStrat Registrar")
+    c.drawString(108, 47, "Hash: 8b7d92a014...")
 
-    # 8. Signatures & Official Stamp (Symmetric, Zero Collision)
-    # Stamp in Center between signatories: center at x = 490, width=92, height=92
+    # 8. Signatures & Official Stamp (Symmetric, Zero Collision, Generous Spacing)
+    # Stamp in Center between signatories: center at x = 515, width=88, height=88
     stamp_img = create_corporate_stamp(360)
     stamp_path = os.path.join(OUTPUT_DIR, "temp_stamp.png")
     stamp_img.save(stamp_path)
-    c.drawImage(stamp_path, 444, 38, width=92, height=92, mask='auto')
+    c.drawImage(stamp_path, 471, 38, width=88, height=88, mask='auto')
 
-    # Executive Signature 1: Dr. Arvind R. Nair (Centered at x = 280)
+    # Executive Signature 1: Dr. Arvind R. Nair (Centered at x = 320)
     sig1_img = create_signature_image("Dr. Arvind R. Nair", "VP AI", color=(14, 38, 98))
     sig1_path = os.path.join(OUTPUT_DIR, "temp_sig1.png")
     sig1_img.save(sig1_path)
     
-    sig1_center = 280
-    sig1_line_w = 145
+    sig1_center = 320
+    sig1_line_w = 135
     c.setStrokeColor(navy)
     c.setLineWidth(1)
     c.line(sig1_center - (sig1_line_w / 2.0), 78, sig1_center + (sig1_line_w / 2.0), 78)
-    c.drawImage(sig1_path, sig1_center - 55, 80, width=110, height=32, mask='auto')
+    c.drawImage(sig1_path, sig1_center - 55, 81, width=110, height=30, mask='auto')
     
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(navy)
@@ -371,17 +336,17 @@ def build_pdf_certificate():
     c.drawCentredString(sig1_center, 57, "Vice President, AI & Data Engineering")
     c.drawCentredString(sig1_center, 47, "CogniStrat Technologies Pvt. Ltd.")
 
-    # Executive Signature 2: Meenakshi Sundaram (Centered at x = 700)
+    # Executive Signature 2: Meenakshi Sundaram (Centered at x = 710)
     sig2_img = create_signature_image("Meenakshi Sundaram", "Director HR", color=(14, 38, 98))
     sig2_path = os.path.join(OUTPUT_DIR, "temp_sig2.png")
     sig2_img.save(sig2_path)
     
-    sig2_center = 700
-    sig2_line_w = 145
+    sig2_center = 710
+    sig2_line_w = 135
     c.setStrokeColor(navy)
     c.setLineWidth(1)
     c.line(sig2_center - (sig2_line_w / 2.0), 78, sig2_center + (sig2_line_w / 2.0), 78)
-    c.drawImage(sig2_path, sig2_center - 60, 80, width=120, height=32, mask='auto')
+    c.drawImage(sig2_path, sig2_center - 60, 81, width=120, height=30, mask='auto')
     
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(navy)
