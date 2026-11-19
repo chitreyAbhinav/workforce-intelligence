@@ -85,28 +85,28 @@ def create_nexora_stamp(size=360):
     img = img.rotate(6, resample=Image.BICUBIC)
     return img
 
-def create_signature_image_v2(name, title, color=(18, 45, 105)):
+def create_signature_image_v2(name, title, color=(14, 38, 98)):
     """
-    Generate distinct, authentic cursive free-hand signature graphics for corporate authorities
+    Generate distinct, authentic cursive executive signature graphics for corporate authorities
     using natural handwriting script fonts with fluid pen flourishes.
     """
     scale = 4
     if "Rajeshwar" in name:
         sig_text = "Rajeshwar V. Rao"
         font_file = "VLADIMIR.TTF" if os.path.exists(r"C:\Windows\Fonts\VLADIMIR.TTF") else "segoescb.ttf"
-        font_size = 54
-        slant = 2.0
-        flourish_style = "swoop"
+        font_size = 42
+        slant = 1.5
+        flourish_style = "taper"
     else:  # Sunita Deshmukh
         sig_text = "Sunita Deshmukh"
-        font_file = "BRUSHSCI.TTF" if os.path.exists(r"C:\Windows\Fonts\BRUSHSCI.TTF") else "segoesc.ttf"
-        font_size = 50
-        slant = 2.0
-        flourish_style = "loop"
+        font_file = "FRSCRIPT.TTF" if os.path.exists(r"C:\Windows\Fonts\FRSCRIPT.TTF") else "segoesc.ttf"
+        font_size = 46
+        slant = 0.0
+        flourish_style = "swirl"
 
     font_path = os.path.join(r"C:\Windows\Fonts", font_file)
     try:
-        font = ImageFont.truetype(font_path, font_size * scale)
+        font = ImageFont.truetype(font_path, int(font_size * scale))
     except:
         font = ImageFont.load_default()
 
@@ -117,43 +117,54 @@ def create_signature_image_v2(name, title, color=(18, 45, 105)):
     th = bbox[3] - bbox[1]
 
     cw = tw + int(100 * scale)
-    ch = th + int(90 * scale)
+    ch = th + int(60 * scale)
     img = Image.new("RGBA", (cw, ch), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
 
-    ink_rgba = (color[0], color[1], color[2], 245)
+    ink_rgba = (color[0], color[1], color[2], 235)
 
-    tx = int(40 * scale)
-    ty = int(20 * scale)
+    tx = int(25 * scale)
+    ty = int(12 * scale)
     draw.text((tx, ty), sig_text, font=font, fill=ink_rgba)
 
-    # Dynamic freehand flourish underline sweeping beneath signature
-    fx_start = tx + int(10 * scale)
-    fx_end = tx + tw + int(20 * scale)
-    fy = ty + th + int(6 * scale)
-
-    steps = 80
-    pts = []
-    for i in range(steps + 1):
-        t = i / steps
-        x = fx_start + (fx_end - fx_start) * t
-        if flourish_style == "swoop":
-            y = fy - math.sin(t * math.pi) * (14 * scale) + (t * 8 * scale)
-        else:
-            y = fy - math.sin(t * math.pi * 1.2) * (10 * scale) + (t * 6 * scale)
-        pts.append((x, y))
-
-    for i in range(len(pts) - 1):
-        t = i / steps
-        stroke_w = max(1, int((2.0 + 2.5 * math.sin(t * math.pi)) * scale))
-        draw.line([pts[i], pts[i+1]], fill=ink_rgba, width=stroke_w)
+    # Dynamic natural flourish underline sweeping beneath signature
+    if flourish_style == "taper":
+        start_x = tx + int(tw * 0.42)
+        end_x = tx + tw + int(14 * scale)
+        base_y = ty + th + int(2 * scale)
+        pts = []
+        steps = 60
+        for i in range(steps + 1):
+            t = i / steps
+            x = start_x + (end_x - start_x) * t
+            y = base_y - math.sin(t * math.pi) * (4 * scale) + (t * 2 * scale)
+            pts.append((x, y))
+        for i in range(len(pts) - 1):
+            t = i / steps
+            w = max(1, int((2.0 * (1.0 - t * 0.75)) * scale))
+            draw.line([pts[i], pts[i+1]], fill=ink_rgba, width=w)
+    elif flourish_style == "swirl":
+        start_x = tx + int(tw * 0.28)
+        end_x = tx + tw + int(10 * scale)
+        base_y = ty + th + int(2.5 * scale)
+        pts = []
+        steps = 60
+        for i in range(steps + 1):
+            t = i / steps
+            x = start_x + (end_x - start_x) * t
+            y = base_y - math.sin(t * math.pi * 0.85) * (3.5 * scale)
+            pts.append((x, y))
+        for i in range(len(pts) - 1):
+            t = i / steps
+            w = max(1, int((1.8 * (1.0 - t * 0.65)) * scale))
+            draw.line([pts[i], pts[i+1]], fill=ink_rgba, width=w)
 
     if slant != 0:
         img = img.rotate(slant, resample=Image.BICUBIC, expand=True)
 
     cbox = img.getbbox()
     if cbox:
-        pad = int(4 * scale)
+        pad = int(3 * scale)
         img = img.crop((
             max(0, cbox[0] - pad),
             max(0, cbox[1] - pad),
@@ -161,8 +172,8 @@ def create_signature_image_v2(name, title, color=(18, 45, 105)):
             min(img.height, cbox[3] + pad)
         ))
 
-    target_w = 420
-    target_h = int(img.height * (target_w / img.width))
+    target_h = 36
+    target_w = int(img.width * (target_h / img.height))
     return img.resize((target_w, target_h), Image.LANCZOS)
 
 def build_pdf_certificate_v2():
@@ -314,64 +325,71 @@ def build_pdf_certificate_v2():
 
     # 7. Verification QR Code (Bottom Left)
     qr_drawing = qr.QrCodeWidget('https://verify.nexoraglobal.com/credentials/NX-2026-INT-12754-B')
-    qr_drawing.barWidth = 62
-    qr_drawing.barHeight = 62
+    qr_drawing.barWidth = 56
+    qr_drawing.barHeight = 56
     qr_drawing.qrVersion = 2
-    d = Drawing(62, 62)
+    d = Drawing(56, 56)
     d.add(qr_drawing)
     c.saveState()
-    c.translate(65, 44)
+    c.translate(55, 45)
     d.drawOn(c, 0, 0)
     c.restoreState()
     
+    c.setFont("Helvetica-Bold", 7.5)
+    c.setFillColor(primary_teal)
+    c.drawString(120, 92, "AUTHENTIC SECURE CREDENTIAL")
     c.setFont("Helvetica", 6.5)
     c.setFillColor(slate_charcoal)
-    c.drawString(135, 88, "Scan QR to verify credential")
-    c.drawString(135, 78, "Tamper-Proof Digital Verification")
-    c.drawString(135, 68, "Hash: SHA256-e82b719c41f92...")
-    c.drawString(135, 58, "Issued by Nexora Global Registrar")
+    c.drawString(120, 82, "Scan QR to verify credential")
+    c.drawString(120, 72, "Credential ID: NX-2026-INT-12754-B")
+    c.drawString(120, 62, "Digital Registrar: verify.nexoraglobal.com")
+    c.drawString(120, 52, "Issued by Nexora Global Registrar")
 
-    # 8. Signatures & Official Stamp
+    # 8. Signatures & Official Stamp (Symmetric, Zero Collision)
     stamp_img = create_nexora_stamp(360)
     stamp_path = os.path.join(OUTPUT_DIR, "temp_stamp_v2.png")
     stamp_img.save(stamp_path)
-    c.drawImage(stamp_path, (width / 2.0) - 55, 35, width=105, height=105, mask='auto')
+    c.drawImage(stamp_path, 444, 38, width=92, height=92, mask='auto')
 
-    # Executive Signature 1: Dr. Rajeshwar V. Rao
-    sig1_img = create_signature_image_v2("Dr. Rajeshwar V. Rao", "EVP AI Labs", color=(18, 45, 105))
+    # Executive Signature 1: Dr. Rajeshwar V. Rao (Centered at x = 280)
+    sig1_img = create_signature_image_v2("Dr. Rajeshwar V. Rao", "EVP AI Labs", color=(14, 38, 98))
     sig1_path = os.path.join(OUTPUT_DIR, "temp_sig1_v2.png")
     sig1_img.save(sig1_path)
     
-    sig1_x = 290
-    c.drawImage(sig1_path, sig1_x - 30, 80, width=120, height=42, mask='auto')
+    sig1_center = 280
+    sig1_line_w = 145
     c.setStrokeColor(primary_teal)
     c.setLineWidth(1)
-    c.line(sig1_x - 20, 78, sig1_x + 95, 78)
+    c.line(sig1_center - (sig1_line_w / 2.0), 78, sig1_center + (sig1_line_w / 2.0), 78)
+    c.drawImage(sig1_path, sig1_center - 55, 80, width=110, height=32, mask='auto')
+    
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(primary_teal)
-    c.drawCentredString(sig1_x + 37, 67, "Dr. Rajeshwar V. Rao, Ph.D.")
+    c.drawCentredString(sig1_center, 67, "Dr. Rajeshwar V. Rao, Ph.D.")
     c.setFont("Helvetica", 7.5)
     c.setFillColor(slate_charcoal)
-    c.drawCentredString(sig1_x + 37, 57, "Executive Vice President & Head of AI Labs")
-    c.drawCentredString(sig1_x + 37, 47, "Nexora Global Intelligence Solutions Pvt. Ltd.")
+    c.drawCentredString(sig1_center, 57, "Executive Vice President & Head of AI Labs")
+    c.drawCentredString(sig1_center, 47, "Nexora Global Intelligence Solutions Pvt. Ltd.")
 
-    # Executive Signature 2: Sunita Deshmukh
-    sig2_img = create_signature_image_v2("Sunita Deshmukh", "VP Talent", color=(18, 45, 105))
+    # Executive Signature 2: Sunita Deshmukh (Centered at x = 700)
+    sig2_img = create_signature_image_v2("Sunita Deshmukh", "VP Talent", color=(14, 38, 98))
     sig2_path = os.path.join(OUTPUT_DIR, "temp_sig2_v2.png")
     sig2_img.save(sig2_path)
     
-    sig2_x = width - 155
-    c.drawImage(sig2_path, sig2_x - 30, 80, width=120, height=42, mask='auto')
+    sig2_center = 700
+    sig2_line_w = 145
     c.setStrokeColor(primary_teal)
     c.setLineWidth(1)
-    c.line(sig2_x - 20, 78, sig2_x + 95, 78)
+    c.line(sig2_center - (sig2_line_w / 2.0), 78, sig2_center + (sig2_line_w / 2.0), 78)
+    c.drawImage(sig2_path, sig2_center - 60, 80, width=120, height=32, mask='auto')
+    
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(primary_teal)
-    c.drawCentredString(sig2_x + 37, 67, "Sunita Deshmukh")
+    c.drawCentredString(sig2_center, 67, "Sunita Deshmukh")
     c.setFont("Helvetica", 7.5)
     c.setFillColor(slate_charcoal)
-    c.drawCentredString(sig2_x + 37, 57, "Vice President & Head of Global Talent")
-    c.drawCentredString(sig2_x + 37, 47, "Nexora Global Intelligence Solutions Pvt. Ltd.")
+    c.drawCentredString(sig2_center, 57, "Vice President & Head of Global Talent")
+    c.drawCentredString(sig2_center, 47, "Nexora Global Intelligence Solutions Pvt. Ltd.")
 
     c.setFont("Helvetica", 6.5)
     c.setFillColor(colors.HexColor("#7F8C8D"))
