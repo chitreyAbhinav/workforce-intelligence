@@ -79,38 +79,88 @@ def create_corporate_stamp(size=360):
     img = img.rotate(8, resample=Image.BICUBIC)
     return img
 
-def create_signature_image(name, title, color=(20, 40, 100)):
-    """Generate an authentic-looking professional signature graphic."""
-    w, h = 320, 110
-    img = Image.new("RGBA", (w, h), (255, 255, 255, 0))
-    draw = ImageDraw.Draw(img)
-    
+def create_signature_image(name, title, color=(16, 44, 118)):
+    """
+    Generate an authentic, high-resolution cursive free-hand signature graphic 
+    for corporate authorities using natural handwriting script fonts with fluid pen flourishes.
+    """
+    scale = 4
     if "Arvind" in name:
-        base_points = [
-            (25, 65), (45, 25), (60, 80), (80, 30), (100, 75), (115, 45), 
-            (130, 65), (150, 40), (170, 70), (195, 35), (220, 65), (250, 60),
-            (275, 40), (295, 55)
-        ]
-        flourish = [(20, 82), (70, 88), (160, 82), (260, 75), (290, 85)]
+        sig_text = "Arvind R. Nair"
+        # Rage Italic: fast, confident executive fountain-pen signature
+        font_file = "RAGE.TTF" if os.path.exists(r"C:\Windows\Fonts\RAGE.TTF") else "segoescb.ttf"
+        font_size = 56
+        slant = 2.0
+        flourish_style = "swoop"
     else:
-        base_points = [
-            (25, 60), (40, 30), (55, 75), (75, 25), (95, 70), (115, 30),
-            (140, 65), (165, 35), (190, 68), (215, 42), (245, 65), (280, 50)
-        ]
-        flourish = [(15, 80), (80, 85), (180, 80), (275, 78)]
-        
-    for i in range(len(base_points) - 1):
-        x1, y1 = base_points[i]
-        x2, y2 = base_points[i+1]
-        draw.line([x1, y1, x2, y2], fill=(color[0], color[1], color[2], 230), width=3)
-        draw.ellipse([x1-1, y1-1, x1+1, y1+1], fill=(color[0], color[1], color[2], 240))
-        
-    for i in range(len(flourish) - 1):
-        x1, y1 = flourish[i]
-        x2, y2 = flourish[i+1]
-        draw.line([x1, y1, x2, y2], fill=(color[0], color[1], color[2], 200), width=2)
-        
-    return img
+        sig_text = "Meenakshi Sundaram"
+        # Brush Script MT: flowing, elegant corporate authority cursive signature
+        font_file = "BRUSHSCI.TTF" if os.path.exists(r"C:\Windows\Fonts\BRUSHSCI.TTF") else "segoesc.ttf"
+        font_size = 50
+        slant = 2.0
+        flourish_style = "loop"
+
+    font_path = os.path.join(r"C:\Windows\Fonts", font_file)
+    try:
+        font = ImageFont.truetype(font_path, font_size * scale)
+    except:
+        font = ImageFont.load_default()
+
+    temp_img = Image.new("RGBA", (10, 10))
+    d = ImageDraw.Draw(temp_img)
+    bbox = d.textbbox((0, 0), sig_text, font=font)
+    tw = bbox[2] - bbox[0]
+    th = bbox[3] - bbox[1]
+
+    cw = tw + int(100 * scale)
+    ch = th + int(90 * scale)
+    img = Image.new("RGBA", (cw, ch), (255, 255, 255, 0))
+    draw = ImageDraw.Draw(img)
+
+    ink_rgba = (color[0], color[1], color[2], 245)
+
+    tx = int(40 * scale)
+    ty = int(20 * scale)
+    draw.text((tx, ty), sig_text, font=font, fill=ink_rgba)
+
+    # Dynamic freehand flourish underline sweeping beneath the signature
+    fx_start = tx + int(10 * scale)
+    fx_end = tx + tw + int(20 * scale)
+    fy = ty + th + int(6 * scale)
+
+    steps = 80
+    pts = []
+    for i in range(steps + 1):
+        t = i / steps
+        x = fx_start + (fx_end - fx_start) * t
+        if flourish_style == "swoop":
+            y = fy - math.sin(t * math.pi) * (14 * scale) + (t * 8 * scale)
+        else:
+            y = fy - math.sin(t * math.pi * 1.2) * (10 * scale) + (t * 6 * scale)
+        pts.append((x, y))
+
+    for i in range(len(pts) - 1):
+        t = i / steps
+        stroke_w = max(1, int((2.0 + 2.5 * math.sin(t * math.pi)) * scale))
+        draw.line([pts[i], pts[i+1]], fill=ink_rgba, width=stroke_w)
+
+    if slant != 0:
+        img = img.rotate(slant, resample=Image.BICUBIC, expand=True)
+
+    cbox = img.getbbox()
+    if cbox:
+        pad = int(4 * scale)
+        img = img.crop((
+            max(0, cbox[0] - pad),
+            max(0, cbox[1] - pad),
+            min(img.width, cbox[2] + pad),
+            min(img.height, cbox[3] + pad)
+        ))
+
+    # Resize smoothly with Lanczos filter for ultra-crisp ink edges
+    target_w = 420
+    target_h = int(img.height * (target_w / img.width))
+    return img.resize((target_w, target_h), Image.LANCZOS)
 
 def build_pdf_certificate():
     """Build high-resolution vector PDF certificate adhering to corporate design."""
@@ -291,7 +341,9 @@ def build_pdf_certificate():
     sig1_img.save(sig1_path)
     
     sig1_x = 290
-    c.drawImage(sig1_path, sig1_x - 30, 80, width=120, height=42, mask='auto')
+    center1 = sig1_x + 37.5
+    w1, h1 = 125, 36
+    c.drawImage(sig1_path, center1 - (w1 / 2.0), 80, width=w1, height=h1, mask='auto')
     c.setStrokeColor(navy)
     c.setLineWidth(1)
     c.line(sig1_x - 20, 78, sig1_x + 95, 78)
@@ -303,12 +355,14 @@ def build_pdf_certificate():
     c.drawCentredString(sig1_x + 37, 57, "Vice President, AI & Data Engineering")
     c.drawCentredString(sig1_x + 37, 47, "CogniStrat Technologies Pvt. Ltd.")
 
-    sig2_img = create_signature_image("Meenakshi Sundaram", "Director HR", color=(18, 48, 110))
+    sig2_img = create_signature_image("Meenakshi Sundaram", "Director HR", color=(16, 44, 118))
     sig2_path = os.path.join(OUTPUT_DIR, "temp_sig2.png")
     sig2_img.save(sig2_path)
     
     sig2_x = width - 155
-    c.drawImage(sig2_path, sig2_x - 30, 80, width=120, height=42, mask='auto')
+    center2 = sig2_x + 37.5
+    w2, h2 = 130, 36
+    c.drawImage(sig2_path, center2 - (w2 / 2.0), 80, width=w2, height=h2, mask='auto')
     c.setStrokeColor(navy)
     c.setLineWidth(1)
     c.line(sig2_x - 20, 78, sig2_x + 95, 78)

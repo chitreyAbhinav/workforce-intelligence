@@ -334,7 +334,7 @@ def build_full_report():
 
     sig_data = [
         ("SIGNATURE", "SIGNATURE"),
-        ("Dr. Arvind Sharma", "Er. Prabhjot Kaur"),
+        ("Dr. Jasneet Kaur", "Er. Prabhjot Kaur"),
         ("HEAD OF THE DEPARTMENT", "SUPERVISOR"),
         ("Department of Computer Science & Engineering", "Assistant Professor (CSE-Takshashila)"),
         ("Chandigarh University, Mohali, Punjab", "Chandigarh University, Mohali, Punjab")
@@ -418,8 +418,8 @@ def build_full_report():
         "and an inspiring academic ambiance that fosters engineering excellence."
     )
     add_body_p(doc,
-        "I express my deep sense of gratitude to Dr. Arvind Sharma, Head of Department, Computer Science & Engineering, "
-        "for his visionary leadership, administrative encouragement, and continuous academic support."
+        "I express my deep sense of gratitude to Dr. Jasneet Kaur, Head of Department, Computer Science & Engineering, "
+        "for her visionary leadership, administrative encouragement, and continuous academic support."
     )
     add_body_p(doc,
         "I am immensely indebted to my internal academic supervisor, Er. Prabhjot Kaur, Assistant Professor, "
