@@ -1,0 +1,564 @@
+{
+  "role_benchmarks": [
+    {
+      "role": "Data Architect",
+      "sample_size": 467,
+      "min_lpa": 1.5,
+      "p10_lpa": 8.0,
+      "p25_lpa": 12.5,
+      "median_lpa": 20.0,
+      "mean_lpa": 19.4,
+      "p75_lpa": 21.7,
+      "p90_lpa": 37.5,
+      "max_lpa": 50.6,
+      "avg_experience_req": 10.3
+    },
+    {
+      "role": "Senior Data Scientist",
+      "sample_size": 228,
+      "min_lpa": 4.5,
+      "p10_lpa": 12.5,
+      "p25_lpa": 16.2,
+      "median_lpa": 20.0,
+      "mean_lpa": 21.6,
+      "p75_lpa": 25.1,
+      "p90_lpa": 31.7,
+      "max_lpa": 82.0,
+      "avg_experience_req": 5.9
+    },
+    {
+      "role": "Senior Data Engineer",
+      "sample_size": 191,
+      "min_lpa": 3.4,
+      "p10_lpa": 11.7,
+      "p25_lpa": 14.3,
+      "median_lpa": 17.5,
+      "mean_lpa": 18.8,
+      "p75_lpa": 21.9,
+      "p90_lpa": 26.6,
+      "max_lpa": 68.3,
+      "avg_experience_req": 6.1
+    },
+    {
+      "role": "Data Engineer",
+      "sample_size": 1343,
+      "min_lpa": 1.5,
+      "p10_lpa": 1.5,
+      "p25_lpa": 8.0,
+      "median_lpa": 12.5,
+      "mean_lpa": 12.2,
+      "p75_lpa": 15.1,
+      "p90_lpa": 20.0,
+      "max_lpa": 45.3,
+      "avg_experience_req": 6.0
+    },
+    {
+      "role": "Data Scientist",
+      "sample_size": 378,
+      "min_lpa": 1.5,
+      "p10_lpa": 7.5,
+      "p25_lpa": 8.6,
+      "median_lpa": 12.5,
+      "mean_lpa": 14.4,
+      "p75_lpa": 19.9,
+      "p90_lpa": 20.7,
+      "max_lpa": 37.5,
+      "avg_experience_req": 4.7
+    },
+    {
+      "role": "Machine Learning Engineer",
+      "sample_size": 570,
+      "min_lpa": 1.5,
+      "p10_lpa": 4.5,
+      "p25_lpa": 8.0,
+      "median_lpa": 12.5,
+      "mean_lpa": 15.1,
+      "p75_lpa": 20.0,
+      "p90_lpa": 37.5,
+      "max_lpa": 37.5,
+      "avg_experience_req": 6.0
+    },
+    {
+      "role": "Senior Business Analyst",
+      "sample_size": 306,
+      "min_lpa": 1.5,
+      "p10_lpa": 7.3,
+      "p25_lpa": 9.6,
+      "median_lpa": 12.5,
+      "mean_lpa": 13.4,
+      "p75_lpa": 15.8,
+      "p90_lpa": 20.0,
+      "max_lpa": 37.5,
+      "avg_experience_req": 5.7
+    },
+    {
+      "role": "Business Analyst",
+      "sample_size": 822,
+      "min_lpa": 1.5,
+      "p10_lpa": 1.5,
+      "p25_lpa": 5.4,
+      "median_lpa": 9.1,
+      "mean_lpa": 10.9,
+      "p75_lpa": 12.5,
+      "p90_lpa": 20.0,
+      "max_lpa": 37.5,
+      "avg_experience_req": 5.1
+    },
+    {
+      "role": "Senior Data Analyst",
+      "sample_size": 209,
+      "min_lpa": 1.5,
+      "p10_lpa": 4.3,
+      "p25_lpa": 6.1,
+      "median_lpa": 8.5,
+      "mean_lpa": 9.8,
+      "p75_lpa": 12.7,
+      "p90_lpa": 16.8,
+      "max_lpa": 37.5,
+      "avg_experience_req": 4.6
+    },
+    {
+      "role": "Data Analyst",
+      "sample_size": 9152,
+      "min_lpa": 1.4,
+      "p10_lpa": 1.5,
+      "p25_lpa": 4.5,
+      "median_lpa": 8.0,
+      "mean_lpa": 10.6,
+      "p75_lpa": 12.5,
+      "p90_lpa": 20.0,
+      "max_lpa": 37.5,
+      "avg_experience_req": 5.6
+    }
+  ],
+  "experience_progression": [
+    {
+      "experience_tier": "0-2 yrs (Entry)",
+      "overall_median_lpa": 1.5,
+      "overall_mean_lpa": 3.6,
+      "sample_count": 1597,
+      "role_breakdown": {
+        "Business Analyst": {
+          "median_lpa": 4.5,
+          "mean_lpa": 5.1,
+          "count": 101
+        },
+        "Data Analyst": {
+          "median_lpa": 1.5,
+          "mean_lpa": 3.0,
+          "count": 1294
+        },
+        "Data Architect": {
+          "median_lpa": 3.0,
+          "mean_lpa": 3.0,
+          "count": 4
+        },
+        "Data Engineer": {
+          "median_lpa": 1.8,
+          "mean_lpa": 4.5,
+          "count": 94
+        },
+        "Data Scientist": {
+          "median_lpa": 9.8,
+          "mean_lpa": 10.1,
+          "count": 43
+        },
+        "Machine Learning Engineer": {
+          "median_lpa": 5.8,
+          "mean_lpa": 8.2,
+          "count": 43
+        },
+        "Senior Business Analyst": {
+          "median_lpa": 8.6,
+          "mean_lpa": 8.4,
+          "count": 8
+        },
+        "Senior Data Analyst": {
+          "median_lpa": 5.6,
+          "mean_lpa": 5.2,
+          "count": 8
+        },
+        "Senior Data Engineer": {
+          "median_lpa": 11.8,
+          "mean_lpa": 11.8,
+          "count": 1
+        },
+        "Senior Data Scientist": {
+          "median_lpa": 24.6,
+          "mean_lpa": 24.6,
+          "count": 1
+        }
+      }
+    },
+    {
+      "experience_tier": "3-5 yrs (Mid-Level)",
+      "overall_median_lpa": 8.0,
+      "overall_mean_lpa": 8.1,
+      "sample_count": 5600,
+      "role_breakdown": {
+        "Business Analyst": {
+          "median_lpa": 8.0,
+          "mean_lpa": 8.4,
+          "count": 383
+        },
+        "Data Analyst": {
+          "median_lpa": 4.5,
+          "mean_lpa": 6.9,
+          "count": 3764
+        },
+        "Data Architect": {
+          "median_lpa": 8.0,
+          "mean_lpa": 8.3,
+          "count": 50
+        },
+        "Data Engineer": {
+          "median_lpa": 8.0,
+          "mean_lpa": 9.3,
+          "count": 552
+        },
+        "Data Scientist": {
+          "median_lpa": 12.5,
+          "mean_lpa": 13.2,
+          "count": 219
+        },
+        "Machine Learning Engineer": {
+          "median_lpa": 8.0,
+          "mean_lpa": 10.7,
+          "count": 228
+        },
+        "Senior Business Analyst": {
+          "median_lpa": 11.6,
+          "mean_lpa": 10.8,
+          "count": 138
+        },
+        "Senior Data Analyst": {
+          "median_lpa": 8.0,
+          "mean_lpa": 9.0,
+          "count": 138
+        },
+        "Senior Data Engineer": {
+          "median_lpa": 15.3,
+          "mean_lpa": 16.2,
+          "count": 46
+        },
+        "Senior Data Scientist": {
+          "median_lpa": 18.4,
+          "mean_lpa": 19.2,
+          "count": 82
+        }
+      }
+    },
+    {
+      "experience_tier": "6-8 yrs (Senior)",
+      "overall_median_lpa": 12.5,
+      "overall_mean_lpa": 13.8,
+      "sample_count": 3644,
+      "role_breakdown": {
+        "Business Analyst": {
+          "median_lpa": 12.5,
+          "mean_lpa": 13.8,
+          "count": 227
+        },
+        "Data Analyst": {
+          "median_lpa": 12.5,
+          "mean_lpa": 12.9,
+          "count": 2268
+        },
+        "Data Architect": {
+          "median_lpa": 12.5,
+          "mean_lpa": 14.3,
+          "count": 85
+        },
+        "Data Engineer": {
+          "median_lpa": 12.5,
+          "mean_lpa": 13.2,
+          "count": 412
+        },
+        "Data Scientist": {
+          "median_lpa": 12.5,
+          "mean_lpa": 14.2,
+          "count": 68
+        },
+        "Machine Learning Engineer": {
+          "median_lpa": 20.0,
+          "mean_lpa": 17.6,
+          "count": 190
+        },
+        "Senior Business Analyst": {
+          "median_lpa": 13.3,
+          "mean_lpa": 13.8,
+          "count": 117
+        },
+        "Senior Data Analyst": {
+          "median_lpa": 11.2,
+          "mean_lpa": 11.4,
+          "count": 56
+        },
+        "Senior Data Engineer": {
+          "median_lpa": 17.1,
+          "mean_lpa": 18.5,
+          "count": 110
+        },
+        "Senior Data Scientist": {
+          "median_lpa": 21.2,
+          "mean_lpa": 22.5,
+          "count": 111
+        }
+      }
+    },
+    {
+      "experience_tier": "9+ yrs (Lead / Principal)",
+      "overall_median_lpa": 20.0,
+      "overall_mean_lpa": 20.9,
+      "sample_count": 2825,
+      "role_breakdown": {
+        "Business Analyst": {
+          "median_lpa": 20.0,
+          "mean_lpa": 19.0,
+          "count": 111
+        },
+        "Data Analyst": {
+          "median_lpa": 20.0,
+          "mean_lpa": 20.7,
+          "count": 1826
+        },
+        "Data Architect": {
+          "median_lpa": 20.0,
+          "mean_lpa": 22.6,
+          "count": 328
+        },
+        "Data Engineer": {
+          "median_lpa": 20.0,
+          "mean_lpa": 18.9,
+          "count": 285
+        },
+        "Data Scientist": {
+          "median_lpa": 20.0,
+          "mean_lpa": 24.2,
+          "count": 48
+        },
+        "Machine Learning Engineer": {
+          "median_lpa": 20.0,
+          "mean_lpa": 22.7,
+          "count": 109
+        },
+        "Senior Business Analyst": {
+          "median_lpa": 20.0,
+          "mean_lpa": 21.3,
+          "count": 43
+        },
+        "Senior Data Analyst": {
+          "median_lpa": 20.0,
+          "mean_lpa": 18.1,
+          "count": 7
+        },
+        "Senior Data Engineer": {
+          "median_lpa": 21.9,
+          "mean_lpa": 23.7,
+          "count": 34
+        },
+        "Senior Data Scientist": {
+          "median_lpa": 21.5,
+          "mean_lpa": 24.0,
+          "count": 34
+        }
+      }
+    }
+  ],
+  "company_tiers": [
+    {
+      "company_tier": "Global Tech & Cloud Giants",
+      "companies_represented": 8,
+      "sample_postings": 2083,
+      "median_salary_lpa": 25.1,
+      "mean_salary_lpa": 26.1,
+      "min_salary_lpa": 2.5,
+      "max_salary_lpa": 100.0,
+      "top_hiring_companies": {
+        "Amazon": 1279,
+        "Walmart": 362,
+        "PayPal": 148,
+        "Microsoft Corporation": 127,
+        "Google": 79
+      }
+    },
+    {
+      "company_tier": "Strategic Consulting & Analytics Specialists",
+      "companies_represented": 16,
+      "sample_postings": 5079,
+      "median_salary_lpa": 14.5,
+      "mean_salary_lpa": 15.1,
+      "min_salary_lpa": 1.0,
+      "max_salary_lpa": 36.5,
+      "top_hiring_companies": {
+        "Deloitte": 1714,
+        "Ernst & Young": 896,
+        "Fractal Analytics": 484,
+        "Tiger Analytics": 462,
+        "Mu Sigma": 332
+      }
+    },
+    {
+      "company_tier": "Banking, FinTech & GCC Hubs",
+      "companies_represented": 15,
+      "sample_postings": 4056,
+      "median_salary_lpa": 14.2,
+      "mean_salary_lpa": 15.3,
+      "min_salary_lpa": 2.0,
+      "max_salary_lpa": 51.0,
+      "top_hiring_companies": {
+        "HSBC": 795,
+        "JP Morgan Chase": 632,
+        "ICICI Bank": 456,
+        "Wells Fargo India": 395,
+        "Barclays": 391
+      }
+    },
+    {
+      "company_tier": "Tech Unicorns & Product Disruptors",
+      "companies_represented": 11,
+      "sample_postings": 1731,
+      "median_salary_lpa": 14.0,
+      "mean_salary_lpa": 17.1,
+      "min_salary_lpa": 3.0,
+      "max_salary_lpa": 100.0,
+      "top_hiring_companies": {
+        "Flipkart": 545,
+        "Zomato": 301,
+        "Oyo Rooms": 235,
+        "Paytm": 185,
+        "Swiggy": 177
+      }
+    },
+    {
+      "company_tier": "Mid-Market Enterprise & GCCs",
+      "companies_represented": 578,
+      "sample_postings": 49138,
+      "median_salary_lpa": 11.4,
+      "mean_salary_lpa": 12.8,
+      "min_salary_lpa": 0.2,
+      "max_salary_lpa": 102.0,
+      "top_hiring_companies": {
+        "Genpact": 2147,
+        "L&T Infotech": 1873,
+        "Evalueserve": 1698,
+        "DXC Technology": 1076,
+        "EXL Service": 996
+      }
+    },
+    {
+      "company_tier": "Tier-1 IT & Global Systems Integrators",
+      "companies_represented": 14,
+      "sample_postings": 30918,
+      "median_salary_lpa": 9.0,
+      "mean_salary_lpa": 10.6,
+      "min_salary_lpa": 1.6,
+      "max_salary_lpa": 36.0,
+      "top_hiring_companies": {
+        "TCS": 9064,
+        "Accenture": 5425,
+        "Cognizant": 3813,
+        "Wipro": 2566,
+        "IBM": 2480
+      }
+    }
+  ],
+  "geographic_hubs": [
+    {
+      "metro": "Bengaluru",
+      "total_job_postings": 3309,
+      "market_share_pct": 27.4,
+      "median_salary_lpa": 12.5,
+      "mean_salary_lpa": 12.9,
+      "top_roles": {
+        "Data Analyst": 2178,
+        "Data Engineer": 469,
+        "Machine Learning Engineer": 199
+      }
+    },
+    {
+      "metro": "Delhi NCR",
+      "total_job_postings": 2752,
+      "market_share_pct": 22.8,
+      "median_salary_lpa": 8.0,
+      "mean_salary_lpa": 11.3,
+      "top_roles": {
+        "Data Analyst": 2180,
+        "Data Engineer": 182,
+        "Machine Learning Engineer": 118
+      }
+    },
+    {
+      "metro": "Mumbai",
+      "total_job_postings": 1972,
+      "market_share_pct": 16.3,
+      "median_salary_lpa": 12.5,
+      "mean_salary_lpa": 12.2,
+      "top_roles": {
+        "Data Analyst": 1612,
+        "Business Analyst": 110,
+        "Data Engineer": 102
+      }
+    },
+    {
+      "metro": "Other Metro / Remote",
+      "total_job_postings": 1281,
+      "market_share_pct": 10.6,
+      "median_salary_lpa": 8.0,
+      "mean_salary_lpa": 10.0,
+      "top_roles": {
+        "Data Analyst": 1023,
+        "Data Engineer": 102,
+        "Business Analyst": 81
+      }
+    },
+    {
+      "metro": "Pune",
+      "total_job_postings": 946,
+      "market_share_pct": 7.8,
+      "median_salary_lpa": 8.0,
+      "mean_salary_lpa": 10.5,
+      "top_roles": {
+        "Data Analyst": 667,
+        "Data Engineer": 111,
+        "Business Analyst": 60
+      }
+    },
+    {
+      "metro": "Hyderabad",
+      "total_job_postings": 851,
+      "market_share_pct": 7.1,
+      "median_salary_lpa": 8.0,
+      "mean_salary_lpa": 11.1,
+      "top_roles": {
+        "Data Analyst": 603,
+        "Data Engineer": 106,
+        "Business Analyst": 48
+      }
+    },
+    {
+      "metro": "Chennai",
+      "total_job_postings": 790,
+      "market_share_pct": 6.5,
+      "median_salary_lpa": 8.0,
+      "mean_salary_lpa": 9.5,
+      "top_roles": {
+        "Data Analyst": 571,
+        "Data Engineer": 73,
+        "Business Analyst": 62
+      }
+    },
+    {
+      "metro": "Kolkata",
+      "total_job_postings": 163,
+      "market_share_pct": 1.4,
+      "median_salary_lpa": 8.0,
+      "mean_salary_lpa": 8.6,
+      "top_roles": {
+        "Data Analyst": 131,
+        "Machine Learning Engineer": 11,
+        "Data Engineer": 10
+      }
+    }
+  ]
+}

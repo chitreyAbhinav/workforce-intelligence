@@ -3,12 +3,34 @@
 > **Engineered for the SAS CU Hackathon — Round 2 (100-Mark Defensible Evaluation System)**  
 > *Connecting Market Demand, Required Skills, Empirical Employee Outcomes (JDS), and Senior Leadership Characteristics (SDS).*
 
-[![CI/CD Pipeline](https://github.com/AbhinavChitrey/workforce-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/AbhinavChitrey/workforce-intelligence/actions)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f?style=for-the-badge&logo=github)](https://chitreyabhinav.github.io/workforce-intelligence/)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Codespaces-Instant_Sandbox-blue?style=for-the-badge&logo=github)](https://codespaces.new/chitreyAbhinav/workforce-intelligence)
+[![CI/CD Pipeline](https://github.com/chitreyAbhinav/workforce-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/chitreyAbhinav/workforce-intelligence/actions)
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.14-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Tests Passing](https://img.shields.io/badge/pytest-22%2F22%20passed-brightgreen.svg)](tests/)
 [![Selenium Automation](https://img.shields.io/badge/selenium-6%20E2E%20scenarios-success.svg)](tests/test_selenium_e2e.py)
 [![Round-2 Alignment](https://img.shields.io/badge/Hackathon-Round%202%20(100M)-orange.svg)](reports/Approach_Note.docx)
+
+---
+
+## 🌐 Instant Live Preview (Zero Setup Required)
+
+> 🚀 **Live Interactive Dashboard:** [**https://chitreyabhinav.github.io/workforce-intelligence/**](https://chitreyabhinav.github.io/workforce-intelligence/)  
+> *Click the link above to test the fully functional WorkforceX platform directly in your web browser — zero installation, zero server lag, and 100% interactive.*
+
+```
+👉 https://chitreyabhinav.github.io/workforce-intelligence/
+```
+
+- 🧹 **Data Quality Engine (25M):** Inspect automated cleaning logs, Tukey IQR outlier cutoffs, and 13,965 validated records.
+- 📊 **Job Market Intelligence:** Interactive salary benchmarks, experience curves, and metro distributions across FAANG vs GCC vs IT Services.
+- 🤖 **Predictive ML & XAI Engine (30M):** Adjust candidate skill sliders (JDS) or Big-Five OCEAN traits (SDS) to observe real-time predicted hike probabilities and SHAP-style local additive explanations.
+- 📈 **Market × Success Matrix:** Interactive 2×2 Strategic Quadrants (Core Bets, Table Stakes, Elite Differentiators, Low Priority).
+- 🧭 **AI Career GPS & Adjacency Graph:** D3 force-directed network topology showing transition feasibility scores and chronological 3-phase flight plans.
+- 🎯 **Skill ROI Optimizer & Gap Radar:** Mathematical objective function ranking skills to prevent wasting effort on zero-ROI commodities.
+- 🏢 **Workforce Digital Twin Simulator:** Interactive 100-person cohort sliders simulating targeted reskilling and demonstrating a **6.3× ROI (saving ₹96.0 Lakhs)**.
+- 💬 **AI Workforce Copilot:** Natural language decision support grounded in exact dataset metrics.
 
 ---
 
@@ -120,14 +142,22 @@ tests/
 
 ## 💻 Quickstart & Running the Platform
 
-### 1. Installation
+### 🚀 Option 1: Live Interactive Browser Preview (Zero Installation)
+No environment setup needed — evaluate and interact with the platform immediately:  
+👉 **[https://chitreyabhinav.github.io/workforce-intelligence/](https://chitreyabhinav.github.io/workforce-intelligence/)**
+
+---
+
+### 💻 Option 2: Local Development & Pipeline Execution
+
+#### 1. Installation
 ```bash
-git clone https://github.com/AbhinavChitrey/workforce-intelligence.git
+git clone https://github.com/chitreyAbhinav/workforce-intelligence.git
 cd workforce-intelligence
 pip install -r requirements.txt
 ```
 
-### 2. Run Complete Pipeline & Dashboard
+#### 2. Run Complete Pipeline & Dashboard
 ```bash
 # Runs data cleansing, trains ML models, runs test suite, generates Word & PPTX reports, and launches dashboard
 python run_all.py
@@ -135,7 +165,7 @@ python run_all.py
 
 Open your browser at **`http://127.0.0.1:5000`** to access the interactive dashboard!
 
-### 3. Run Automated Tests
+#### 3. Run Automated Tests
 ```bash
 # Unit & integration tests + AI-assisted metamorphic tests
 pytest tests/test_data_quality.py tests/test_ml_models.py tests/test_engines.py tests/test_ai_assisted.py tests/test_api.py -v

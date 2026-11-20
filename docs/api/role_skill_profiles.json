@@ -1,0 +1,777 @@
+{
+  "Business Analyst": {
+    "role": "Business Analyst",
+    "total_postings": 634,
+    "top_skills": [
+      {
+        "skill": "SQL",
+        "count": 348,
+        "penetration_pct": 54.9
+      },
+      {
+        "skill": "Business Acumen",
+        "count": 313,
+        "penetration_pct": 49.4
+      },
+      {
+        "skill": "Excel / Advanced Excel",
+        "count": 309,
+        "penetration_pct": 48.7
+      },
+      {
+        "skill": "Tableau",
+        "count": 298,
+        "penetration_pct": 47.0
+      },
+      {
+        "skill": "Power BI",
+        "count": 281,
+        "penetration_pct": 44.3
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 34,
+        "penetration_pct": 5.4
+      },
+      {
+        "skill": "Data Visualization",
+        "count": 22,
+        "penetration_pct": 3.5
+      },
+      {
+        "skill": "SAS",
+        "count": 19,
+        "penetration_pct": 3.0
+      },
+      {
+        "skill": "R",
+        "count": 13,
+        "penetration_pct": 2.1
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 10,
+        "penetration_pct": 1.6
+      },
+      {
+        "skill": "Python",
+        "count": 7,
+        "penetration_pct": 1.1
+      },
+      {
+        "skill": "Java",
+        "count": 5,
+        "penetration_pct": 0.8
+      },
+      {
+        "skill": "Hive",
+        "count": 1,
+        "penetration_pct": 0.2
+      },
+      {
+        "skill": "Scala",
+        "count": 1,
+        "penetration_pct": 0.2
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 1,
+        "penetration_pct": 0.2
+      }
+    ]
+  },
+  "Data Analyst": {
+    "role": "Data Analyst",
+    "total_postings": 8965,
+    "top_skills": [
+      {
+        "skill": "SQL",
+        "count": 7825,
+        "penetration_pct": 87.3
+      },
+      {
+        "skill": "Excel / Advanced Excel",
+        "count": 7582,
+        "penetration_pct": 84.6
+      },
+      {
+        "skill": "Tableau",
+        "count": 7292,
+        "penetration_pct": 81.3
+      },
+      {
+        "skill": "Power BI",
+        "count": 7265,
+        "penetration_pct": 81.0
+      },
+      {
+        "skill": "SAS",
+        "count": 347,
+        "penetration_pct": 3.9
+      },
+      {
+        "skill": "Java",
+        "count": 305,
+        "penetration_pct": 3.4
+      },
+      {
+        "skill": "Business Acumen",
+        "count": 202,
+        "penetration_pct": 2.3
+      },
+      {
+        "skill": "R",
+        "count": 166,
+        "penetration_pct": 1.9
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 163,
+        "penetration_pct": 1.8
+      },
+      {
+        "skill": "Python",
+        "count": 151,
+        "penetration_pct": 1.7
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 103,
+        "penetration_pct": 1.1
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 99,
+        "penetration_pct": 1.1
+      },
+      {
+        "skill": "Data Visualization",
+        "count": 54,
+        "penetration_pct": 0.6
+      },
+      {
+        "skill": "CI/CD & DevOps",
+        "count": 45,
+        "penetration_pct": 0.5
+      },
+      {
+        "skill": "AWS",
+        "count": 31,
+        "penetration_pct": 0.3
+      }
+    ]
+  },
+  "Data Architect": {
+    "role": "Data Architect",
+    "total_postings": 417,
+    "top_skills": [
+      {
+        "skill": "SQL",
+        "count": 280,
+        "penetration_pct": 67.1
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 243,
+        "penetration_pct": 58.3
+      },
+      {
+        "skill": "AWS",
+        "count": 223,
+        "penetration_pct": 53.5
+      },
+      {
+        "skill": "Docker / Kubernetes",
+        "count": 218,
+        "penetration_pct": 52.3
+      },
+      {
+        "skill": "Java",
+        "count": 73,
+        "penetration_pct": 17.5
+      },
+      {
+        "skill": "Hadoop",
+        "count": 36,
+        "penetration_pct": 8.6
+      },
+      {
+        "skill": "Spark / PySpark",
+        "count": 32,
+        "penetration_pct": 7.7
+      },
+      {
+        "skill": "Python",
+        "count": 24,
+        "penetration_pct": 5.8
+      },
+      {
+        "skill": "Azure",
+        "count": 23,
+        "penetration_pct": 5.5
+      },
+      {
+        "skill": "Business Acumen",
+        "count": 20,
+        "penetration_pct": 4.8
+      },
+      {
+        "skill": "Hive",
+        "count": 19,
+        "penetration_pct": 4.6
+      },
+      {
+        "skill": "Scala",
+        "count": 10,
+        "penetration_pct": 2.4
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 8,
+        "penetration_pct": 1.9
+      },
+      {
+        "skill": "R",
+        "count": 7,
+        "penetration_pct": 1.7
+      },
+      {
+        "skill": "Tableau",
+        "count": 6,
+        "penetration_pct": 1.4
+      }
+    ]
+  },
+  "Data Engineer": {
+    "role": "Data Engineer",
+    "total_postings": 1155,
+    "top_skills": [
+      {
+        "skill": "SQL",
+        "count": 836,
+        "penetration_pct": 72.4
+      },
+      {
+        "skill": "Python",
+        "count": 757,
+        "penetration_pct": 65.5
+      },
+      {
+        "skill": "Spark / PySpark",
+        "count": 744,
+        "penetration_pct": 64.4
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 684,
+        "penetration_pct": 59.2
+      },
+      {
+        "skill": "Java",
+        "count": 205,
+        "penetration_pct": 17.7
+      },
+      {
+        "skill": "Hadoop",
+        "count": 144,
+        "penetration_pct": 12.5
+      },
+      {
+        "skill": "Hive",
+        "count": 84,
+        "penetration_pct": 7.3
+      },
+      {
+        "skill": "CI/CD & DevOps",
+        "count": 48,
+        "penetration_pct": 4.2
+      },
+      {
+        "skill": "Scala",
+        "count": 42,
+        "penetration_pct": 3.6
+      },
+      {
+        "skill": "AWS",
+        "count": 36,
+        "penetration_pct": 3.1
+      },
+      {
+        "skill": "Business Acumen",
+        "count": 28,
+        "penetration_pct": 2.4
+      },
+      {
+        "skill": "R",
+        "count": 24,
+        "penetration_pct": 2.1
+      },
+      {
+        "skill": "Docker / Kubernetes",
+        "count": 23,
+        "penetration_pct": 2.0
+      },
+      {
+        "skill": "SAS",
+        "count": 21,
+        "penetration_pct": 1.8
+      },
+      {
+        "skill": "Azure",
+        "count": 18,
+        "penetration_pct": 1.6
+      }
+    ]
+  },
+  "Data Scientist": {
+    "role": "Data Scientist",
+    "total_postings": 190,
+    "top_skills": [
+      {
+        "skill": "Python",
+        "count": 105,
+        "penetration_pct": 55.3
+      },
+      {
+        "skill": "SQL",
+        "count": 102,
+        "penetration_pct": 53.7
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 90,
+        "penetration_pct": 47.4
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 80,
+        "penetration_pct": 42.1
+      },
+      {
+        "skill": "R",
+        "count": 50,
+        "penetration_pct": 26.3
+      },
+      {
+        "skill": "SAS",
+        "count": 27,
+        "penetration_pct": 14.2
+      },
+      {
+        "skill": "Hadoop",
+        "count": 14,
+        "penetration_pct": 7.4
+      },
+      {
+        "skill": "Natural Language Processing",
+        "count": 13,
+        "penetration_pct": 6.8
+      },
+      {
+        "skill": "Java",
+        "count": 13,
+        "penetration_pct": 6.8
+      },
+      {
+        "skill": "Scala",
+        "count": 12,
+        "penetration_pct": 6.3
+      },
+      {
+        "skill": "Spark / PySpark",
+        "count": 11,
+        "penetration_pct": 5.8
+      },
+      {
+        "skill": "Data Visualization",
+        "count": 10,
+        "penetration_pct": 5.3
+      },
+      {
+        "skill": "Excel / Advanced Excel",
+        "count": 10,
+        "penetration_pct": 5.3
+      },
+      {
+        "skill": "Tableau",
+        "count": 9,
+        "penetration_pct": 4.7
+      },
+      {
+        "skill": "Hive",
+        "count": 9,
+        "penetration_pct": 4.7
+      }
+    ]
+  },
+  "Machine Learning Engineer": {
+    "role": "Machine Learning Engineer",
+    "total_postings": 511,
+    "top_skills": [
+      {
+        "skill": "Machine Learning",
+        "count": 421,
+        "penetration_pct": 82.4
+      },
+      {
+        "skill": "Python",
+        "count": 290,
+        "penetration_pct": 56.8
+      },
+      {
+        "skill": "R",
+        "count": 170,
+        "penetration_pct": 33.3
+      },
+      {
+        "skill": "SQL",
+        "count": 155,
+        "penetration_pct": 30.3
+      },
+      {
+        "skill": "Deep Learning",
+        "count": 112,
+        "penetration_pct": 21.9
+      },
+      {
+        "skill": "Natural Language Processing",
+        "count": 104,
+        "penetration_pct": 20.4
+      },
+      {
+        "skill": "Spark / PySpark",
+        "count": 95,
+        "penetration_pct": 18.6
+      },
+      {
+        "skill": "Java",
+        "count": 70,
+        "penetration_pct": 13.7
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 65,
+        "penetration_pct": 12.7
+      },
+      {
+        "skill": "SAS",
+        "count": 61,
+        "penetration_pct": 11.9
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 57,
+        "penetration_pct": 11.2
+      },
+      {
+        "skill": "Hadoop",
+        "count": 36,
+        "penetration_pct": 7.0
+      },
+      {
+        "skill": "Computer Vision",
+        "count": 33,
+        "penetration_pct": 6.5
+      },
+      {
+        "skill": "Scala",
+        "count": 16,
+        "penetration_pct": 3.1
+      },
+      {
+        "skill": "Hive",
+        "count": 16,
+        "penetration_pct": 3.1
+      }
+    ]
+  },
+  "Senior Business Analyst": {
+    "role": "Senior Business Analyst",
+    "total_postings": 119,
+    "top_skills": [
+      {
+        "skill": "Business Acumen",
+        "count": 62,
+        "penetration_pct": 52.1
+      },
+      {
+        "skill": "SQL",
+        "count": 56,
+        "penetration_pct": 47.1
+      },
+      {
+        "skill": "Excel / Advanced Excel",
+        "count": 55,
+        "penetration_pct": 46.2
+      },
+      {
+        "skill": "Tableau",
+        "count": 41,
+        "penetration_pct": 34.5
+      },
+      {
+        "skill": "Power BI",
+        "count": 35,
+        "penetration_pct": 29.4
+      },
+      {
+        "skill": "SAS",
+        "count": 19,
+        "penetration_pct": 16.0
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 10,
+        "penetration_pct": 8.4
+      },
+      {
+        "skill": "R",
+        "count": 9,
+        "penetration_pct": 7.6
+      },
+      {
+        "skill": "Data Visualization",
+        "count": 4,
+        "penetration_pct": 3.4
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 3,
+        "penetration_pct": 2.5
+      },
+      {
+        "skill": "Python",
+        "count": 3,
+        "penetration_pct": 2.5
+      },
+      {
+        "skill": "Hive",
+        "count": 2,
+        "penetration_pct": 1.7
+      },
+      {
+        "skill": "Deep Learning",
+        "count": 2,
+        "penetration_pct": 1.7
+      },
+      {
+        "skill": "Natural Language Processing",
+        "count": 2,
+        "penetration_pct": 1.7
+      },
+      {
+        "skill": "Scala",
+        "count": 1,
+        "penetration_pct": 0.8
+      }
+    ]
+  },
+  "Senior Data Analyst": {
+    "role": "Senior Data Analyst",
+    "total_postings": 22,
+    "top_skills": [
+      {
+        "skill": "Excel / Advanced Excel",
+        "count": 14,
+        "penetration_pct": 63.6
+      },
+      {
+        "skill": "SQL",
+        "count": 12,
+        "penetration_pct": 54.5
+      },
+      {
+        "skill": "Tableau",
+        "count": 12,
+        "penetration_pct": 54.5
+      },
+      {
+        "skill": "Power BI",
+        "count": 10,
+        "penetration_pct": 45.5
+      },
+      {
+        "skill": "R",
+        "count": 6,
+        "penetration_pct": 27.3
+      },
+      {
+        "skill": "Python",
+        "count": 4,
+        "penetration_pct": 18.2
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 3,
+        "penetration_pct": 13.6
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 3,
+        "penetration_pct": 13.6
+      },
+      {
+        "skill": "SAS",
+        "count": 2,
+        "penetration_pct": 9.1
+      },
+      {
+        "skill": "Deep Learning",
+        "count": 1,
+        "penetration_pct": 4.5
+      },
+      {
+        "skill": "Data Visualization",
+        "count": 1,
+        "penetration_pct": 4.5
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 1,
+        "penetration_pct": 4.5
+      }
+    ]
+  },
+  "Senior Data Engineer": {
+    "role": "Senior Data Engineer",
+    "total_postings": 8,
+    "top_skills": [
+      {
+        "skill": "SQL",
+        "count": 7,
+        "penetration_pct": 87.5
+      },
+      {
+        "skill": "Python",
+        "count": 6,
+        "penetration_pct": 75.0
+      },
+      {
+        "skill": "Spark / PySpark",
+        "count": 6,
+        "penetration_pct": 75.0
+      },
+      {
+        "skill": "ETL Pipelines",
+        "count": 6,
+        "penetration_pct": 75.0
+      },
+      {
+        "skill": "Hadoop",
+        "count": 2,
+        "penetration_pct": 25.0
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 1,
+        "penetration_pct": 12.5
+      },
+      {
+        "skill": "Hive",
+        "count": 1,
+        "penetration_pct": 12.5
+      },
+      {
+        "skill": "Azure",
+        "count": 1,
+        "penetration_pct": 12.5
+      },
+      {
+        "skill": "Power BI",
+        "count": 1,
+        "penetration_pct": 12.5
+      },
+      {
+        "skill": "Java",
+        "count": 1,
+        "penetration_pct": 12.5
+      },
+      {
+        "skill": "SAS",
+        "count": 1,
+        "penetration_pct": 12.5
+      }
+    ]
+  },
+  "Senior Data Scientist": {
+    "role": "Senior Data Scientist",
+    "total_postings": 43,
+    "top_skills": [
+      {
+        "skill": "Python",
+        "count": 34,
+        "penetration_pct": 79.1
+      },
+      {
+        "skill": "Machine Learning",
+        "count": 27,
+        "penetration_pct": 62.8
+      },
+      {
+        "skill": "R",
+        "count": 20,
+        "penetration_pct": 46.5
+      },
+      {
+        "skill": "SQL",
+        "count": 20,
+        "penetration_pct": 46.5
+      },
+      {
+        "skill": "Statistical Modeling",
+        "count": 14,
+        "penetration_pct": 32.6
+      },
+      {
+        "skill": "Deep Learning",
+        "count": 8,
+        "penetration_pct": 18.6
+      },
+      {
+        "skill": "Hadoop",
+        "count": 6,
+        "penetration_pct": 14.0
+      },
+      {
+        "skill": "SAS",
+        "count": 5,
+        "penetration_pct": 11.6
+      },
+      {
+        "skill": "Spark / PySpark",
+        "count": 4,
+        "penetration_pct": 9.3
+      },
+      {
+        "skill": "Natural Language Processing",
+        "count": 4,
+        "penetration_pct": 9.3
+      },
+      {
+        "skill": "Java",
+        "count": 3,
+        "penetration_pct": 7.0
+      },
+      {
+        "skill": "Tableau",
+        "count": 2,
+        "penetration_pct": 4.7
+      },
+      {
+        "skill": "Computer Vision",
+        "count": 2,
+        "penetration_pct": 4.7
+      },
+      {
+        "skill": "Scala",
+        "count": 2,
+        "penetration_pct": 4.7
+      },
+      {
+        "skill": "Hive",
+        "count": 1,
+        "penetration_pct": 2.3
+      }
+    ]
+  }
+}

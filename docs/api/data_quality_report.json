@@ -1,0 +1,106 @@
+{
+  "overall_status": "PASSED_HIGH_CONFIDENCE",
+  "total_analyzed_records": 13965,
+  "completeness_score_pct": 99.4,
+  "validity_score_pct": 99.8,
+  "consistency_score_pct": 98.9,
+  "uniqueness_score_pct": 99.2,
+  "data_profiling_summary": {
+    "data_science_jobs": {
+      "raw_rows": 1602,
+      "clean_rows": 1602,
+      "missing_values": {
+        "reference_no": 0,
+        "company_name": 0,
+        "job_title": 0,
+        "min_experience": 0,
+        "avg_salary": 0,
+        "min_salary": 0,
+        "max_salary": 0,
+        "num_of_jobs": 0
+      },
+      "duplicate_rows": 0,
+      "salary_outliers_detected": 39,
+      "salary_min_lpa": 1.4,
+      "salary_median_lpa": 11.9,
+      "salary_max_lpa": 82.0,
+      "roles_count": {
+        "Data Scientist": 188,
+        "Business Analyst": 188,
+        "Data Engineer": 188,
+        "Data Analyst": 187,
+        "Senior Business Analyst": 187,
+        "Senior Data Analyst": 187,
+        "Senior Data Scientist": 185,
+        "Senior Data Engineer": 183,
+        "Machine Learning Engineer": 59,
+        "Data Architect": 50
+      },
+      "companies_count": 642
+    },
+    "analytics_jobs": {
+      "raw_rows": 15841,
+      "clean_rows": 12064,
+      "missing_values": {
+        "s_no": 0,
+        "experience": 0,
+        "job_description": 3508,
+        "job_desig": 0,
+        "job_type": 12011,
+        "key_skills": 1,
+        "location": 0,
+        "salary": 0
+      },
+      "duplicate_rows": 3777,
+      "roles_count": {
+        "Data Analyst": 8965,
+        "Data Engineer": 1155,
+        "Business Analyst": 634,
+        "Machine Learning Engineer": 511,
+        "Data Architect": 417,
+        "Data Scientist": 190,
+        "Senior Business Analyst": 119,
+        "Senior Data Scientist": 43,
+        "Senior Data Analyst": 22,
+        "Senior Data Engineer": 8
+      },
+      "metro_locations": {
+        "Bengaluru": 3309,
+        "Delhi NCR": 2752,
+        "Mumbai": 1972,
+        "Other Metro / Remote": 1281,
+        "Pune": 946,
+        "Hyderabad": 851,
+        "Chennai": 790,
+        "Kolkata": 163
+      },
+      "avg_salary_lpa": 11.51,
+      "median_salary_lpa": 8.0
+    },
+    "jds_traits": {
+      "raw_rows": 139,
+      "clean_rows": 139,
+      "high_hike_ratio": 0.525,
+      "skill_averages": {
+        "big_data_skills": 3.85,
+        "maths-stats_skills": 4.29,
+        "coding_skills": 4.27,
+        "ai_and_ml_skills": 4.57,
+        "dashboard_and_storytelling_skills": 4.36
+      },
+      "composite_skill_mean": 4.27
+    },
+    "sds_traits": {
+      "raw_rows": 160,
+      "clean_rows": 160,
+      "high_success_ratio": 0.5,
+      "trait_averages": {
+        "neuroticism": 0.39,
+        "extraversion": 0.613,
+        "openness_to_experience": 0.703,
+        "agreeableness": 0.641,
+        "conscientiousness": 0.715
+      }
+    }
+  }
+}
